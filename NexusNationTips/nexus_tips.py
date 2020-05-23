@@ -170,165 +170,166 @@ class Tips(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         the_author = message.author
-        if message.guild.id == 687040596149272595:
-            async with self.config.guild(message.guild).blacklisted_categories() as categories:
-                async with self.config.guild(message.guild).blacklisted_members() as members:
-                    if message.author.id not in members and message.channel.category.id not in categories and message.author.id not in self.due_to_respond:
-                        message_words_original = message.content.split(" ")
-                        message_words = []
-                        for word in message_words_original:
-                            message_words.append(word.lower())
-                        ...
-                        tick = discord.utils.get(message.guild.emojis, name = "tick")
-                        cross = discord.utils.get(message.guild.emojis, name = "cross")
-                        ...
-                        continue_process = False
-                        ...
-                        tick_embed = discord.Embed(
-                            title="Thank you for your feedback",
-                            description="We're happy this helped fix your issue. If you have any more problems open a ticket using the <#269933786853015553> channel.",
-                            timestamp=datetime.datetime.utcnow(),
-                            colour=0x40eb34
-                        )
-                        cross_embed = discord.Embed(
-                            title="Thank you for your feedback",
-                            description="Sorry that this message did not help fix your issue or was not relevant to your message. If you think we could assist you further please open a ticket using the <#269933786853015553> channel.",
-                            timestamp=datetime.datetime.utcnow(),
-                            colour=0xff1f1f
-                        )
-                        timeout_embed = discord.Embed(
-                            title="Run out of time to respond",
-                            description="Although you did not give feedback in time, we hope this helped fix your issue. If not please open a ticket uting <#269933786853015553> so we can assist you further.",
-                            timestamp=datetime.datetime.utcnow(),
-                            colour=0x595959
-                        )
-                        ...
-                        if ("map" in message_words) and ("missing" in message_words):
-                            support_embed = discord.Embed(
-                                title="Missing Map",
-                                description=f"{self.no_map_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
-                                timestamp=datetime.datetime.utcnow(),
-                                colour=0x03e8fc
-                            )
-                            continue_process = True
-                            tip_given = "Missing map tip"
-                        elif ("how" in message_words) and (("can" in message_words) or ("do" in message_words)) \
-                                and (("appeal" in message_words) or ("unban" in message_words) or ("unmute" in message_words) or ("ungag" in message_words) \
-                                    or ("un-ban" in message_words) or ("un-mute" in message_words) or ("un-gag" in message_words)) \
-                                        or ("un" in message_words and ("ban" in message_words or "gag" in message_words or "mute" in message_words) and ("!suggest" != message_words[0])):
-                            support_embed = discord.Embed(
-                                title="Appealing a punishment",
-                                description=f"{self.appeal_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
-                                timestamp=datetime.datetime.utcnow(),
-                                colour=0x03e8fc
-                            )
-                            continue_process = True
-                            tip_given = "Appealing a punishment tip"
-                        elif ("map" in message_words) and (("differs" in message_words) or ("differ" in message_words) and ("!suggest" != message_words[0])):
-                            support_embed = discord.Embed(
-                                title="Map Differs",
-                                description=f"{self.differs_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
-                                timestamp=datetime.datetime.utcnow(),
-                                colour=0x03e8fc
-                            )
-                            continue_process = True
-                            tip_given = "Map differs tip"
-                        elif ("how" in message_words) and (("can" in message_words) or ("do" in message_words)) \
-                                and ("i" in message_words) and ("suggest" in message_words) \
-                                    and ("!suggest" != message_words[0]):
-                            support_embed = discord.Embed(
-                                title="Submitting a suggestion",
-                                description=f"{self.suggest_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
-                                timestamp=datetime.datetime.utcnow(),
-                                colour=0x03e8fc
-                            )
-                            continue_process = True
-                            tip_given = "How to suggest tip"
-                        elif ("there" in message_words) and ("is" in message_words) and (("hacker" in message_words) or ("spam" in message_words) or ("spammer" in message_words)):
-                            support_embed = discord.Embed(
-                                title="Using !calladmin",
-                                description=f"{self.calladmin_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
-                                timestamp=datetime.datetime.utcnow(),
-                                colour=0x03e8fc
-                            )
-                            continue_process = True
-                            tip_given = "How to calladmin tip"
-                        elif ("how" in message_words) and (("can" in message_words) or ("do" in message_words)) \
-                                and ("i" in message_words) and ("report" in message_words) and ("!suggest" != message_words[0]):
-                            support_embed = discord.Embed(
-                                title="Submitting a report",
-                                timestamp=datetime.datetime.utcnow(),
-                                colour=0x03e8fc
-                            )
-                            support_embed.add_field(
-                                name="Reporting a player",
-                                value=self.report_msg,
-                                inline=False
-                            )
-                            support_embed.add_field(
-                                name="Reporting a bug",
-                                value=f"{self.bug_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
-                                inline=False
-                            )
-                            continue_process = True
-                            tip_given = "How to report tip"
-                        ...
-                        if continue_process:
-                            self.due_to_respond.append(message.author.id)
-                            sent_embed = await message.channel.send(content=message.author.mention, embed=support_embed)
-                            await sent_embed.add_reaction(tick)
-                            await sent_embed.add_reaction(cross)
+        if message.guild != None:
+            if message.guild.id == 687040596149272595:
+                async with self.config.guild(message.guild).blacklisted_categories() as categories:
+                    async with self.config.guild(message.guild).blacklisted_members() as members:
+                        if message.author.id not in members and message.channel.category.id not in categories and message.author.id not in self.due_to_respond:
+                            message_words_original = message.content.split(" ")
+                            message_words = []
+                            for word in message_words_original:
+                                message_words.append(word.lower())
                             ...
-                            def check(reaction, user):
-                                return user == the_author and (reaction == tick or reaction == cross)
+                            tick = discord.utils.get(message.guild.emojis, name = "tick")
+                            cross = discord.utils.get(message.guild.emojis, name = "cross")
                             ...
-                            try:
-                                reaction, user = await self.bot.wait_for('reaction_add', timeout=600, check=check)
-                            except asyncio.TimeoutError:
-                                await sent_embed.edit(embed=timeout_embed)
-                                await sent_embed.clear_reactions()
-                                self.due_to_respond.remove(message.author.id)
-                            else:
-                                logs_channel = discord.utils.get(message.guild.text_channels, id=await self.config.guild(message.guild).logs_channel())
-                                if reaction == tick and user == the_author:
-                                    await reaction.message.edit(embed=tick_embed)
-                                    await reaction.message.clear_reactions()
-
-                                    helpful_embed = discord.Embed(
-                                        description=f"[Go to message]({message.jump_url})",
-                                        colour=0x40eb34,
-                                        timestamp=datetime.datetime.utcnow()
-                                    )
-                                    helpful_embed.set_author(
-                                        icon_url=message.author.avatar_url,
-                                        name=f"{message.author.name} found this tip helpful"
-                                    )
-                                    helpful_embed.add_field(
-                                        name="Tip Given",
-                                        value=tip_given
-                                    )
-                                    self.due_to_respond.remove(message.author.id)
-                                elif reaction == cross and user == the_author:
-                                    await reaction.message.edit(embed=cross_embed)
-                                    await reaction.message.clear_reactions()
-
-                                    helpful_embed = discord.Embed(
-                                        description=f"[Go to message]({message.jump_url})",
-                                        colour=0x40eb34,
-                                        timestamp=datetime.datetime.utcnow()
-                                    )
-                                    helpful_embed.set_author(
-                                        icon_url=message.author.avatar_url,
-                                        name=f"{message.author.name} did not find this tip helpful"
-                                    )
-                                    helpful_embed.add_field(
-                                        name="Tip Given",
-                                        value=tip_given
-                                    )
-                                    self.due_to_respond.remove(message.author.id)
+                            continue_process = False
+                            ...
+                            tick_embed = discord.Embed(
+                                title="Thank you for your feedback",
+                                description="We're happy this helped fix your issue. If you have any more problems open a ticket using the <#269933786853015553> channel.",
+                                timestamp=datetime.datetime.utcnow(),
+                                colour=0x40eb34
+                            )
+                            cross_embed = discord.Embed(
+                                title="Thank you for your feedback",
+                                description="Sorry that this message did not help fix your issue or was not relevant to your message. If you think we could assist you further please open a ticket using the <#269933786853015553> channel.",
+                                timestamp=datetime.datetime.utcnow(),
+                                colour=0xff1f1f
+                            )
+                            timeout_embed = discord.Embed(
+                                title="Run out of time to respond",
+                                description="Although you did not give feedback in time, we hope this helped fix your issue. If not please open a ticket uting <#269933786853015553> so we can assist you further.",
+                                timestamp=datetime.datetime.utcnow(),
+                                colour=0x595959
+                            )
+                            ...
+                            if ("map" in message_words) and ("missing" in message_words):
+                                support_embed = discord.Embed(
+                                    title="Missing Map",
+                                    description=f"{self.no_map_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
+                                    timestamp=datetime.datetime.utcnow(),
+                                    colour=0x03e8fc
+                                )
+                                continue_process = True
+                                tip_given = "Missing map tip"
+                            elif ("how" in message_words) and (("can" in message_words) or ("do" in message_words)) \
+                                    and (("appeal" in message_words) or ("unban" in message_words) or ("unmute" in message_words) or ("ungag" in message_words) \
+                                        or ("un-ban" in message_words) or ("un-mute" in message_words) or ("un-gag" in message_words)) \
+                                            or ("un" in message_words and ("ban" in message_words or "gag" in message_words or "mute" in message_words) and ("!suggest" != message_words[0])):
+                                support_embed = discord.Embed(
+                                    title="Appealing a punishment",
+                                    description=f"{self.appeal_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
+                                    timestamp=datetime.datetime.utcnow(),
+                                    colour=0x03e8fc
+                                )
+                                continue_process = True
+                                tip_given = "Appealing a punishment tip"
+                            elif ("map" in message_words) and (("differs" in message_words) or ("differ" in message_words) and ("!suggest" != message_words[0])):
+                                support_embed = discord.Embed(
+                                    title="Map Differs",
+                                    description=f"{self.differs_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
+                                    timestamp=datetime.datetime.utcnow(),
+                                    colour=0x03e8fc
+                                )
+                                continue_process = True
+                                tip_given = "Map differs tip"
+                            elif ("how" in message_words) and (("can" in message_words) or ("do" in message_words)) \
+                                    and ("i" in message_words) and ("suggest" in message_words) \
+                                        and ("!suggest" != message_words[0]):
+                                support_embed = discord.Embed(
+                                    title="Submitting a suggestion",
+                                    description=f"{self.suggest_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
+                                    timestamp=datetime.datetime.utcnow(),
+                                    colour=0x03e8fc
+                                )
+                                continue_process = True
+                                tip_given = "How to suggest tip"
+                            elif ("there" in message_words) and ("is" in message_words) and (("hacker" in message_words) or ("spam" in message_words) or ("spammer" in message_words)):
+                                support_embed = discord.Embed(
+                                    title="Using !calladmin",
+                                    description=f"{self.calladmin_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
+                                    timestamp=datetime.datetime.utcnow(),
+                                    colour=0x03e8fc
+                                )
+                                continue_process = True
+                                tip_given = "How to calladmin tip"
+                            elif ("how" in message_words) and (("can" in message_words) or ("do" in message_words)) \
+                                    and ("i" in message_words) and ("report" in message_words) and ("!suggest" != message_words[0]):
+                                support_embed = discord.Embed(
+                                    title="Submitting a report",
+                                    timestamp=datetime.datetime.utcnow(),
+                                    colour=0x03e8fc
+                                )
+                                support_embed.add_field(
+                                    name="Reporting a player",
+                                    value=self.report_msg,
+                                    inline=False
+                                )
+                                support_embed.add_field(
+                                    name="Reporting a bug",
+                                    value=f"{self.bug_msg}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
+                                    inline=False
+                                )
+                                continue_process = True
+                                tip_given = "How to report tip"
+                            ...
+                            if continue_process:
+                                self.due_to_respond.append(message.author.id)
+                                sent_embed = await message.channel.send(content=message.author.mention, embed=support_embed)
+                                await sent_embed.add_reaction(tick)
+                                await sent_embed.add_reaction(cross)
+                                ...
+                                def check(reaction, user):
+                                    return user == the_author and (reaction == tick or reaction == cross)
+                                ...
                                 try:
-                                    await logs_channel.send(embed=helpful_embed)
-                                except:
-                                    await message.channel.send(
-                                        "Logs channel not found")
-                                    pass
+                                    reaction, user = await self.bot.wait_for('reaction_add', timeout=600, check=check)
+                                except asyncio.TimeoutError:
+                                    await sent_embed.edit(embed=timeout_embed)
+                                    await sent_embed.clear_reactions()
+                                    self.due_to_respond.remove(message.author.id)
+                                else:
+                                    logs_channel = discord.utils.get(message.guild.text_channels, id=await self.config.guild(message.guild).logs_channel())
+                                    if reaction == tick and user == the_author:
+                                        await reaction.message.edit(embed=tick_embed)
+                                        await reaction.message.clear_reactions()
+
+                                        helpful_embed = discord.Embed(
+                                            description=f"[Go to message]({message.jump_url})",
+                                            colour=0x40eb34,
+                                            timestamp=datetime.datetime.utcnow()
+                                        )
+                                        helpful_embed.set_author(
+                                            icon_url=message.author.avatar_url,
+                                            name=f"{message.author.name} found this tip helpful"
+                                        )
+                                        helpful_embed.add_field(
+                                            name="Tip Given",
+                                            value=tip_given
+                                        )
+                                        self.due_to_respond.remove(message.author.id)
+                                    elif reaction == cross and user == the_author:
+                                        await reaction.message.edit(embed=cross_embed)
+                                        await reaction.message.clear_reactions()
+
+                                        helpful_embed = discord.Embed(
+                                            description=f"[Go to message]({message.jump_url})",
+                                            colour=0x40eb34,
+                                            timestamp=datetime.datetime.utcnow()
+                                        )
+                                        helpful_embed.set_author(
+                                            icon_url=message.author.avatar_url,
+                                            name=f"{message.author.name} did not find this tip helpful"
+                                        )
+                                        helpful_embed.add_field(
+                                            name="Tip Given",
+                                            value=tip_given
+                                        )
+                                        self.due_to_respond.remove(message.author.id)
+                                    try:
+                                        await logs_channel.send(embed=helpful_embed)
+                                    except:
+                                        await message.channel.send(
+                                            "Logs channel not found")
+                                        pass
