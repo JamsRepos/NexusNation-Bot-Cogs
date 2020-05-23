@@ -10,7 +10,6 @@ def guild_check():
     return commands.check(checker)
 
 class Tips(commands.Cog):
-    
     '''Looks for keywords/phrases within messages and responds based on pre-defined settings.'''
 
     __author__ = "Raff"
@@ -54,7 +53,6 @@ class Tips(commands.Cog):
         else:
             await self.config.guild(ctx.guild).logs_channel.set(None)
             await ctx.send(f"Tips-Cog logs channel ID removed from config")
-    
     @setlogchannel.error
     async def setlogchannel_error(self, ctx, error):
         if isinstance(error, commands.BadArgument):
@@ -203,7 +201,6 @@ class Tips(commands.Cog):
                             description="Although you did not give feedback in time, we hope this helped fix your issue. If not please open a ticket uting <#269933786853015553> so we can assist you further.",
                             timestamp=datetime.datetime.utcnow(),
                             colour=0x595959
-                        
                         )
                         ...
                         if ("map" in message_words) and ("missing" in message_words):
