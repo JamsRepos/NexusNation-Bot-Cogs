@@ -18,7 +18,6 @@
 
   - `[p]ns category` - Creates the category that custom channels will be created in
   - `[p]ns wipe` - Removes all related channels and categories from the discord server
-
   - `[p]privatechannel create <text>` - Creates a private text channel
   - `[p]privatechannel create <voice>` - Creates a private voice channel
   - `[p]privatechannel add <Member> <text/voice>` - Give a member access to a private channel
@@ -41,8 +40,6 @@
   - `[p]bugreport` - Shows the bug report help message
   - `[p]calladmin` - Shows the calladmin help message
   - `[p]vip` - Shows information about VIP and VIP+
-
   - `[p]setlogschannel` - Sets the text channel that logs for the tips cog will be sent to
-
   - `[p]tblacklist <Member>` - Prevents a user from triggering help messages
   - `[p]tblacklist <Category>` - Prevents help messages from being triggered within certain categories
