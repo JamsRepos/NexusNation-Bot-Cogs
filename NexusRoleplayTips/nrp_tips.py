@@ -9,7 +9,7 @@ def guild_check():
             return True
     return commands.check(checker)
 
-class Tips(commands.Cog):
+class NRPTips(commands.Cog):
     '''Looks for keywords/phrases within messages and responds based on pre-defined settings.'''
 
     __author__ = "Raff"
