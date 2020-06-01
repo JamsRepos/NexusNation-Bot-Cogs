@@ -25,7 +25,8 @@ class NRPTips(commands.Cog):
         }
         self.config.register_guild(**default_guild)
         ...
-        self.citizen_fx_ticket = "If you are receiving a message regarding Citizen FX Ticket, this will be due to FiveM's authentication servers being down. To find out when it's back up, use https://lambda.fivem.net/ and the message contains \"CleanAndLegit\" then it is back up!"
+        self.citizen_fx_ticket = "If you are receiving a message regarding Citizen FX Ticket, this will be due to FiveM's authentication servers being down.\n\nTo find out when it's back up, use https://lambda.fivem.net/ and the message contains \"CleanAndLegit\" then it is back up!"
+        self.onesync_whitelist = "It seems like Patreon is having some issues connecting to our server. This could be due to some temporary downtime they may be having. This should resolve itself shortly and happens from time to time."
         ...
         self.due_to_respond = []
     ...
@@ -34,7 +35,7 @@ class NRPTips(commands.Cog):
     @commands.command()
     @guild_check()
     @has_any_role("Owner", "Lead Admin")
-    async def setlogchannel(self, ctx, channelid: int = None):
+    async def setnrplogchannel(self, ctx, channelid: int = None):
         if channelid != None:
             find_logs_channel = discord.utils.get(ctx.guild.text_channels, id=int(channelid))
             await self.config.guild(ctx.guild).logs_channel.set(find_logs_channel.id)
@@ -42,12 +43,12 @@ class NRPTips(commands.Cog):
         else:
             await self.config.guild(ctx.guild).logs_channel.set(None)
             await ctx.send(f"Tips-Cog logs channel ID removed from config")
-    @setlogchannel.error
-    async def setlogchannel_error(self, ctx, error):
+    @setnrplogchannel.error
+    async def setnrplogchannel_error(self, ctx, error):
         if isinstance(error, commands.BadArgument):
             await ctx.send("That channel does not exist...")
     ...
-    @commands.group(name="tblacklist")
+    @commands.group(name="tnrpblacklist")
     @guild_check()
     @has_any_role("Owner", "Lead Admin")
     async def tips_blacklist(self, ctx):
@@ -94,10 +95,17 @@ class NRPTips(commands.Cog):
     ...
     @commands.command()
     @guild_check()
-    async def missing(self, ctx):
-        nomapembed = discord.Embed(title="No Citizen FX Ticket", description="{}".format(
+    async def citizenfx(self, ctx):
+        citizenfx = discord.Embed(title="No Citizen FX Ticket", description="{}".format(
             self.citizen_fx_ticket), color=0xff2f34)
-        await ctx.send(embed=nomapembed)
+        await ctx.send(embed=citizenfx)
+
+    @commands.command()
+    @guild_check()
+    async def onesync(self, ctx):
+        onesync = discord.Embed(title="OneSync is not whitelisted", description="{}".format(
+            self.onesync_whitelist), color=0xff2f34)
+        await ctx.send(embed=onesync)
     ...
     # Message reply
     ...
@@ -147,6 +155,15 @@ class NRPTips(commands.Cog):
                                 )
                                 continue_process = True
                                 tip_given = "Citizen FX Ticket Tip"
+                            elif ("onesync" in message_words) and ("whitelisted" in message_words) and ("onesync_plus" in message_words):
+                                support_embed = discord.Embed(
+                                    title="OneSync is not whitelisted",
+                                    description=f"{self.onesync_whitelist}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
+                                    timestamp=datetime.datetime.utcnow(),
+                                    colour=0x03e8fc
+                                )
+                                continue_process = True
+                                tip_given = "OneSync Whitelist Tip"
                             ...
                             if continue_process:
                                 self.due_to_respond.append(message.author.id)
