@@ -151,7 +151,7 @@ class NRPTips(commands.Cog):
                                     title="No Citizen FX Ticket",
                                     description=f"{self.citizen_fx_ticket}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
                                     timestamp=datetime.datetime.utcnow(),
-                                    colour=0x03e8fc
+                                    colour=0x37de07
                                 )
                                 continue_process = True
                                 tip_given = "Citizen FX Ticket Tip"
@@ -160,7 +160,7 @@ class NRPTips(commands.Cog):
                                     title="OneSync is not whitelisted",
                                     description=f"{self.onesync_whitelist}\n\n**If this message was helpful, please react with a **{tick} **if not, react with a **{cross}**.**",
                                     timestamp=datetime.datetime.utcnow(),
-                                    colour=0x03e8fc
+                                    colour=0x37de07
                                 )
                                 continue_process = True
                                 tip_given = "OneSync Whitelist Tip"
