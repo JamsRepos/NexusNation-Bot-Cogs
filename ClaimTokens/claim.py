@@ -13,10 +13,12 @@ def ifconfig():
         cog = ctx.cog
         url = await cog.config.guild(ctx.guild).url()
         api_key = await cog.config.guild(ctx.guild).api_key()
-        if not (url and api_key):
+        if not (url and api_key) and (ctx.guild.id == 269912749327253504):
             raise commands.UserFeedbackCheckFailure(message="You need to setup Prometheus server url and api key first!")
-        else:
+        elif (url and api_key) and (ctx.guild.id == 269912749327253504):
             return True
+        else:
+            return False
     return commands.check(predicate)
 
 def is_booster():
