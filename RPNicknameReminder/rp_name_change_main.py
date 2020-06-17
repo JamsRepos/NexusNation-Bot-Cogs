@@ -15,6 +15,7 @@ class nameChange(commands.Cog):
     async def nickname_reminder(self):
 
         nexus_rp = discord.utils.get(self.bot.guilds, id=699702073951912028)
+        bot_commands = discord.utils.get(nexus_rp.text_channels, id=713173661523116043)
 
         reminder_embed = discord.Embed(
             description="Hello and sorry for the message! I see you have not changed your nickname yet.\n\nPlease could you change your nickname to the full name of your character. If you have multiple, please seperate them with the `|` symbol.",
@@ -35,7 +36,7 @@ class nameChange(commands.Cog):
                     await member.send(embed=reminder_embed)
                     print(f"sent message to {member.name} reminding them to change their nickname")
                 except exception as e:
-                    print(e)
+                    await bot_commands.send(content=member.mention, embed=reminder_embed)
             elif member.bot:
                 print(f"{member.name} is a bot")
 
