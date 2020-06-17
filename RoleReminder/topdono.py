@@ -49,10 +49,10 @@ class TopDonator(commands.Cog):
                 roles_after.append(role.id)
             if top_donator_role in roles_before\
                 and top_donator_role not in roles_after:
-                await after.send(f"<@!{after.id}> you are no longer a Top Donator, your donation amount has been overtaken.\n **Visit https://thenexusnation.com/store to re-claim your spot.**")
+                await after.send(f"<@!{after.id}> you are no longer a Top Donator, your donation amount has been overtaken.\n **Visit https://nexushub.io to re-claim your spot.**")
             elif vip_role in roles_before\
                 and vip_role not in roles_after:
-                await after.send(f"<@!{after.id}> you are no longer a VIP, your VIP has expired.\n **Visit https://thenexusnation.com/store to re-claim your spot.**")
+                await after.send(f"<@!{after.id}> you are no longer a VIP, your VIP has expired.\n **Visit https://nexushub.io to re-claim your spot.**")
             elif vip_plus_role in roles_before\
                     and vip_plus_role not in roles_after:
-                await after.send(f"<@!{after.id}> you are no longer a VIP+, your VIP+ has expired.\n **Visit https://thenexusnation.com/store to re-claim your spot.**")
+                await after.send(f"<@!{after.id}> you are no longer a VIP+, your VIP+ has expired.\n **Visit https://nexushub.io to re-claim your spot.**")
