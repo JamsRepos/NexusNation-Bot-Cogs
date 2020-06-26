@@ -67,7 +67,7 @@ class nexusUtils(commands.Cog):
         ...
         try:
             await car_sale_embed(ctx, seller, q1)
-            a1 = await self.bot.wait_for("message", check=check, timeout=3)
+            a1 = await self.bot.wait_for("message", check=check, timeout=300)
             await car_sale_embed(ctx, seller, q2)
             a2 = await self.bot.wait_for("message", check=check, timeout=300)
             await car_sale_embed(ctx, seller, q3)
