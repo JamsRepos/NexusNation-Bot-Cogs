@@ -91,7 +91,7 @@ class nexusUtils(commands.Cog):
                     await seller.send("`Please upload an image`")
                     continue
         except asyncio.TimeoutError:
-            await ctx.channel.send(f"{ctx.author.mention} you ran out of time to enter all necessasry information for your car sale.")
+            await ctx.channel.send(f"{ctx.author.mention} you ran out of time to enter all necessary information for your car sale.")
         except discord.errors.Forbidden:
             await ctx.channel.send(f"{ctx.author.mention} your DMs are closed. Please alter your privacy settings to put a vehicle up for sale.")
         else:
