@@ -66,11 +66,13 @@ class nexusUtils(commands.Cog):
             if (":ig:" not in message.content):
                 await message.delete()
                 try:
-                    message.author.send("Please format your instagram posts properly by including the `:ig:` emoji")
+                    await message.author.send("Please format your instagram posts properly by including the `:ig:` emoji")
                 except discord.errors.Forbidden:
-                    bot_commands_channel.send(f"{message.author.mention} Please format your instagram posts properly by including the :ig: emoji")
-            if (len(message.attachments)>0):
-                message.add_reaction("❤️")
+                    await bot_commands_channel.send(f"{message.author.mention} Please format your instagram posts properly by including the :ig: emoji")
+                else:
+            elif (":ig:" in message.content):
+                if (len(message.attachments)>0):
+                    await message.add_reaction("❤️")
         else: 
             pass
 
