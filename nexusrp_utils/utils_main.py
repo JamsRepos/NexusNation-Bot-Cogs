@@ -69,7 +69,6 @@ class nexusUtils(commands.Cog):
                     await message.author.send("Please format your instagram posts properly by including the `:ig:` emoji")
                 except discord.errors.Forbidden:
                     await bot_commands_channel.send(f"{message.author.mention} Please format your instagram posts properly by including the :ig: emoji")
-                else:
             elif (":ig:" in message.content):
                 if (len(message.attachments)>0):
                     await message.add_reaction("❤️")
