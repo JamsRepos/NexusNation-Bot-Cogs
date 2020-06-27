@@ -14,6 +14,34 @@ async def car_sale_embed(ctx, seller, question):
     )
     await seller.send(embed=embed)
 
+async def embed_transformer(ctx, embed, previous):
+    sold_embed = discord.Embed(
+        color=0xf20c0c,
+        timestamp=datetime.datetime.utcnow()
+    )
+    sold_embed.set_author(
+        name=f"{ctx.author.display_name} SOLD VEHICLE",
+        icon_url=ctx.author.avatar_url
+    )
+    for field in embed.fields:
+        sold_embed.add_field(
+            name=field.name,
+            value=field.value,
+            inline=False
+        )
+    sold_embed.set_image(
+        url=embed.image.url
+    )
+    sold_embed.set_footer(
+        text = "Copyright © 2020 NexusHub.io",
+        icon_url = "https://cdn.discordapp.com/icons/699702073951912028/a_1d960abbbe922ff536e0d469dc4f518a.webp?size=128"
+    )
+    await previous.edit(embed=sold_embed)
+    await ctx.send(">>> You have marked your car as sold")
+    async with ctx.cog.config.member(ctx.author).open_sales() as selling:
+        await selling.remove(previous.id)
+
+
 class nexusUtils(commands.Cog):
 
     __author__ = "Raff"
@@ -21,6 +49,11 @@ class nexusUtils(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.config = Config.get_conf(self, identifier=213123)
+        default_member = {
+            "open_sales": []
+        }
+        self.config.register_member(**default_member)
 
     # Nexus RP instagram reaction adder
     @commands.Cog.listener()
@@ -131,4 +164,24 @@ class nexusUtils(commands.Cog):
                 icon_url = "https://cdn.discordapp.com/icons/699702073951912028/a_1d960abbbe922ff536e0d469dc4f518a.webp?size=128"
             )
             ...
-            await car_sales_channel.send(embed=sale_embed)
+            sent = await car_sales_channel.send(embed=sale_embed)
+            async with self.config.member(ctx.author).open_sales() as selling:
+                selling.append(sent.id)
+    
+    @guild_check()
+    @commands.command()
+    async def sold(self, ctx, product):
+        car_sales_channel = discord.utils.get(ctx.guild.channels, id=723090935747051531)
+        try:
+            sale = await car_sales_channel.fetch_message(int(product))
+        except Exception as e:
+            ctx.send(">>> Message doesn't exist")
+        else:
+            async with self.config.member(ctx.author).open_sales() as selling:
+                if(sale.id in selling):
+                    if len(sale.embeds)>0:
+                        embed = sale.embeds[0]
+                        await embed_transformer(ctx, embed, sale)
+                else:
+                    ctx.send(">>> Please use the message ID of a vehicle you are selling")
+                        
