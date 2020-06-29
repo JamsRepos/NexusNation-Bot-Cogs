@@ -50,7 +50,7 @@ async def terms_of_service(ctx, color, tier, collection_items, collection_price,
         return (reactor == user) and (tos.channel == reaction.message.channel) and (str(reaction.emoji) == "✅")
 
     terms = discord.Embed(
-        description = "By accepting this agreement, you agree that you have a current balance of at least $150,000 and agree that upon accepting this agreement, $150,000 will be removed from you and will be reflected in your /cash balance.\n\nYou agree that the shipment you receive is final and is awarded to you based on a fair system, completely automated by our <@!409819492655562767> bot. You agree that the shipment of guns will be delivered within 24 hours, and instant delivery is not promised. You also agree that once the shipment is in your possession the government takes no responsibility regarding your shipment.\n\nReact to the ✅ below to accept these terms and receive your shipment",
+        description = "By accepting this agreement, you agree that you have a current balance of at least $150,000 and agree that upon accepting this agreement, $150,000 will be removed from you and will be reflected in your ``/cash`` balance.\n\nYou agree that the shipment you receive is final and is awarded to you based on a fair system, completely automated by our <@!409819492655562767> bot. You agree that the shipment of guns will be delivered within 24 hours, and instant delivery is not promised. You also agree that once the shipment is in your possession the government takes no responsibility regarding your shipment.\n\n**React to the ✅ below to accept these terms and receive your shipment.**",
         color = 0x2a9946,
         timestamp = datetime.datetime.now()
     )
@@ -74,7 +74,7 @@ async def terms_of_service(ctx, color, tier, collection_items, collection_price,
 
         except asyncio.TimeoutError:
 
-            await user.send(">>> You ran out of time to accept the TOS")
+            await user.send(">>> You did not react in time to our Terms of Service and your order has been cancelled.")
         
         else:
 
