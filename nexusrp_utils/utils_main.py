@@ -185,4 +185,35 @@ class nexusUtils(commands.Cog):
                         await embed_transformer(ctx, embed, sale)
                 else:
                     ctx.send(">>> Please use the message ID of a vehicle you are selling")
-                        
+
+
+    @guild_check()
+    @commands.command(name="leoforms")
+    async def leo_forms(self, ctx):
+        embed = discord.Embed(
+            colour=0x2a9946,
+            timestamp = datetime.datetime.utcnow()
+        )
+        embed.set_author(
+            name=f"Law Enforcement Officer Forms",
+            icon_url="https://i.imgur.com/HlaP5zh.png"
+        )
+        embed.add_field(
+            name="LEO Report Form",
+            value="[Click here to report an Officer](https://docs.google.com/forms/d/1bZwURqygutHZASjxmABdjfdoeUGFH3Ns7m3rL8E-HkI)",
+            inline=False
+        )
+        embed.add_field(
+            name="LEO Commendation Form",
+            value="[Click here to commend an Officer](https://docs.google.com/forms/d/1ppBn9bAA_1BtsmXBAjbqfMBWptKuLHo5rUrJ0cIFb1I)",
+            inline=False
+        )
+        embed.set_footer(
+            text = "Copyright © 2020 NexusHub.io",
+            icon_url = "https://cdn.discordapp.com/icons/699702073951912028/a_1d960abbbe922ff536e0d469dc4f518a.webp?size=128"
+        )
+        try:
+            await ctx.author.send(embed=embed)
+            await ctx.send(">>> Check your DMs")
+        except:
+            await ctx.send(embed=embed)
