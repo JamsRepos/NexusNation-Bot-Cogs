@@ -35,7 +35,7 @@ class nameChange(commands.Cog):
                 try:
                     await member.send(embed=reminder_embed)
                     print(f"sent message to {member.name} reminding them to change their nickname")
-                except exception as e:
+                except Exception as e:
                     await bot_commands.send(content=member.mention, embed=reminder_embed)
             elif member.bot:
                 print(f"{member.name} is a bot")

@@ -34,7 +34,7 @@ class TopDonator(commands.Cog):
     @commands.has_permissions(manage_roles=True)
     async def setvipplusrole(self, ctx, role: discord.Role):
         await self.config.vip_plus_role.set(role.id)
-        await ctx.send(f"VIP+ role set as {role.id}")
+        await ctx.send(f"VIP+ role set as <@&{role}>")
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
