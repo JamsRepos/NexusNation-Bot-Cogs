@@ -25,12 +25,12 @@ async def pickCharacter(ctx, characters, member):
         character_ids.append(characters[i][0])
 
     embed = discord.Embed(
-        description=f"**{ctx.author}** has said that you referred them to the city! Because of this we are giving you **$5000** as a reward. Please choose a character from the list below by reacting to their respective number. **Be sure to have FiveM closed before choosing a character**",
+        description=f"**{ctx.author}** has said that you referred them to the city! Because of this we are giving you **$1000** as a reward. Please choose a character from the list below by reacting to their respective number.\n**Do not be in the city at the time of completing this process as you will NOT receive your reward.**",
         timestamp=datetime.datetime.utcnow(),
         color=0x2a9946
     )
     embed.set_author(
-        name="NexusRP Referrals",
+        name="Nexus Roleplay Referrals",
         icon_url=ctx.author.avatar_url
     )
     embed.add_field(
@@ -51,7 +51,7 @@ async def referredLog(ctx, member):
         print("Could not find RAF logs channel")
     else:
         embed = discord.Embed(
-            title="NexusRP RAF Logs",
+            title="Recruit a Friend Logs",
             color=0x2a9946,
             timestamp=datetime.datetime.utcnow()
         )
@@ -65,7 +65,7 @@ async def referredLog(ctx, member):
         )
         embed.add_field(
             name="Award",
-            value="$5000"
+            value="$1000"
         )
         await logs_channel.send(embed=embed)
 
@@ -145,26 +145,26 @@ class Querynrp(commands.Cog):
                                                 except:
                                                     pass
                                             else:
-                                                await member.send(f"**$5000** Has been added to your character: `{characters[findCharacter(reaction)][1]} {characters[findCharacter(reaction)][2]}`")
+                                                await member.send(f"**$1000** has been added to your character: `{characters[findCharacter(reaction)][1]} {characters[findCharacter(reaction)][2]}`")
                                                 character_number = int(characters[findCharacter(reaction)][0])
-                                                cursor.execute(f"UPDATE characters SET money = money + 5000 WHERE id = {character_number}")
+                                                cursor.execute(f"UPDATE characters SET money = money + 1000 WHERE id = {character_number}")
                                                 cursor.execute(f"SELECT identifier FROM characters WHERE id = {character_number}")
                                                 blid = cursor.fetchone()
                                                 blacklisted.append(blid[0])
                                                 print(f"BLACKLISTED `{blid[0]}`")
                                                 await referredLog(ctx, member)
                                         else:
-                                            await ctx.send("You have already been referred")
+                                            await ctx.send("You have already been referred by someone else.")
                                 else:
-                                    await ctx.send(f"{member.mention} does not have their discord linked to their FiveM, or does not have any characters created on NexusRP.")
+                                    await ctx.send(f"{member.mention} has not launched the Discord Client and FiveM together, or does not have any characters created on Nexus Roleplay.")
 
                             elif playtime[0]<600:
-                                await ctx.send("You do not yet qualify to be referred.")
+                                await ctx.send("You need to have at least **10 hours** of playtime on one character to qualify for this.")
                             elif playtime[0]>1200:
-                                await ctx.send("You no longer qualify to be referred.")
+                                await ctx.send("You no longer qualify for the recruit a friend system due to exceeding the threshold of **20 hours** of playtime.")
 
                         else:
-                            await ctx.send(f"{ctx.author.mention} You either do not have your discord linked to FiveM, or do not have a character created on Nexus RP.")
+                            await ctx.send(f"{ctx.author.mention} You either have not launched the Discord Client and FiveM together, or have no character created on Nexus Roleplay.")
                         
 
             except Error as e:
@@ -202,14 +202,14 @@ class Querynrp(commands.Cog):
                         else:
                             await messg.add_reaction("✅")
                     else:
-                        await ctx.send("There is already a character with this phone number")
+                        await ctx.send("There is already a character with this phone number.")
                     
                     
 
             except Error as e:
                 print("Error while connecting to MySQL", e)
         else:
-            await ctx.send("Phone numbers must be `7` characters long")
+            await ctx.send("Phone numbers must be `7` characters long.")
 
     @commands.guild_only()
     @commands.command()
