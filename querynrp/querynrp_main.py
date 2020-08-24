@@ -84,7 +84,7 @@ class Querynrp(commands.Cog):
 
     @commands.guild_only()
     @commands.command()
-    async def referred(self, ctx, member: discord.Member):
+    async def referrer(self, ctx, member: discord.Member):
         if ctx.author != member:
             pwd = "bZsB+XSK1@8A3nb-"
             try:
