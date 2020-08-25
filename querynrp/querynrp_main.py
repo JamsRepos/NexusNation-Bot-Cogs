@@ -247,17 +247,17 @@ class Querynrp(commands.Cog):
         pwd = "bZsB+XSK1@8A3nb-"
         try:
             connection = mysql.connector.connect(
-                host='localhost',
+                host='185.141.207.151',
                 database='nexusrp',
                 user='nrp',
                 password=f'{pwd}')
             if connection.is_connected():
                 names = []
                 cursor = connection.cursor()
-                cursor.execute(f"SELECT name, character_name FROM users WHERE isOnline = 1")
+                cursor.execute(f"SELECT name, character_name, current_id FROM users WHERE isOnline = 1")
                 players = cursor.fetchall()
                 for i, character in enumerate(players):
-                    names.append(str("**"+character[0]+"**")+" - "+str(character[1]))
+                    names.append(str("**"++str(character[2])+"**"+" - "+"**"+character[0]+"**")+" - "+str(character[1]))
                 embed = discord.Embed(
                     title="Online Players",
                     description="\n".join(names),
