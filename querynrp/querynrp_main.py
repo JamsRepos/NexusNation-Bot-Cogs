@@ -247,7 +247,7 @@ class Querynrp(commands.Cog):
         pwd = "bZsB+XSK1@8A3nb-"
         try:
             connection = mysql.connector.connect(
-                host='185.141.207.151',
+                host='localhost',
                 database='nexusrp',
                 user='nrp',
                 password=f'{pwd}')
