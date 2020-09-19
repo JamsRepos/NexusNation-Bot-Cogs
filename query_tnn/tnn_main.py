@@ -137,9 +137,9 @@ class QueryTNN(commands.Cog):
     async def players(self, ctx):
         try:
             connection = mysql.connector.connect(
-                host='',
-                database='',
-                user='',
+                host='localhost',
+                database='jailbreak',
+                user='webserver',
                 password=self.pwd)
             if connection.is_connected():
                 names = []
@@ -155,9 +155,9 @@ class QueryTNN(commands.Cog):
     async def gangs(self, ctx):
         try:
             connection = mysql.connector.connect(
-                host='',
-                database='',
-                user='',
+                host='localhost',
+                database='jailbreak',
+                user='webserver',
                 password=self.pwd)
             if connection.is_connected():
                 names = []
@@ -174,9 +174,9 @@ class QueryTNN(commands.Cog):
     async def squads(self, ctx):
         try:
             connection = mysql.connector.connect(
-                host='',
-                database='',
-                user='',
+                host='localhost',
+                database='jailbreak',
+                user='webserver',
                 password=self.pwd)
             if connection.is_connected():
                 names = []
@@ -201,9 +201,9 @@ class QueryTNN(commands.Cog):
             member = ctx.author
         try:
             connection = mysql.connector.connect(
-                host='',
-                database='',
-                user='',
+                host='localhost',
+                database='ttt',
+                user='webserver',
                 password=self.pwd)
             if connection.is_connected():
                 names = []
