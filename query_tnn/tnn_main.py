@@ -202,7 +202,7 @@ class QueryTNN(commands.Cog):
         try:
             connection = mysql.connector.connect(
                 host='localhost',
-                database='ttt',
+                database='discord_integration',
                 user='webserver',
                 password=self.pwd)
             if connection.is_connected():
