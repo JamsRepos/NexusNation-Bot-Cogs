@@ -1,0 +1,8 @@
+{
+    "author" : ["Bramble"],
+    "description" : "Search for users snapcodes using the public API.",
+    "hidden" : false,
+    "install_msg" : "Thank you for adding this cog!",
+    "requirements": [],
+    "tags" : ["snapchat", "snapcodes"]
+}
