@@ -110,13 +110,13 @@ class Stats(commands.Cog):
         dpy_version = discord.__version__
         redver = red_version_info
         #botowner = ctx.bot.owner_ids
-        botowner = "<@!167990165258633216>"
+        botowner = "<@!78435584216936448>"
 
         em = discord.Embed(title=name + " (Version {})".format(redver), description= "Cicada is a simple and easy to use Discord music bot offering high quality Music. Supporting Youtube, Soundcloud, and more!", colour=(await ctx.embed_colour()))
         em.set_thumbnail(url=ctx.bot.user.avatar_url)
         em.add_field(name="Owner", value=botowner, inline=False)
         em.add_field(name="Discord.py", value="[{}](https://github.com/Rapptz/discord.py)".format(dpy_version))
-        em.add_field(name="Version", value="{}-BrambleV3".format(redver))
+        em.add_field(name="Version", value="{}-NexuxBo3".format(redver))
         em.add_field(name="Channels", value="{}".format(channels))
         em.add_field(name="Users", value="{}".format(users))
         em.add_field(name="Guilds", value="{}".format(servers))
@@ -131,7 +131,7 @@ class Stats(commands.Cog):
         em.set_footer(text="Page 1/2 | Shard {} | Last restarted: {}".format(shardmsg, since))
 
         info = "Here is some information and links for the bot."
-        page2 = discord.Embed(title="System Information", description= "Cicada is a simple and easy to use Discord music bot offering high quality Music. Supporting Youtube, Soundcloud, and more!", colour=(await ctx.embed_colour()))
+        page2 = discord.Embed(title="System Information", description= "NexusBot is a simple and easy to use custom Discord music bot offering high quality Music. Server information commands and more!", colour=(await ctx.embed_colour()))
         page2.set_thumbnail(url=ctx.bot.user.avatar_url)
         #page4.set_thumbnail(url=ctx.bot.avatar_url)
         #page2.add_field(name="Owner", value="<@{}>".format(ctx.bot.owner_id))
