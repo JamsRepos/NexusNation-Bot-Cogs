@@ -112,11 +112,11 @@ class Stats(commands.Cog):
         #botowner = ctx.bot.owner_ids
         botowner = "<@!78435584216936448>"
 
-        em = discord.Embed(title=name + " (Version {})".format(redver), description= "Cicada is a simple and easy to use Discord music bot offering high quality Music. Supporting Youtube, Soundcloud, and more!", colour=(await ctx.embed_colour()))
+        em = discord.Embed(title=name + " (Version {})".format(redver), description= "NexusBot is a simple and easy to use custom Discord music bot offering high quality Music. Server information commands and more!", colour=(await ctx.embed_colour()))
         em.set_thumbnail(url=ctx.bot.user.avatar_url)
         em.add_field(name="Owner", value=botowner, inline=False)
         em.add_field(name="Discord.py", value="[{}](https://github.com/Rapptz/discord.py)".format(dpy_version))
-        em.add_field(name="Version", value="{}-NexuxBo3".format(redver))
+        em.add_field(name="Version", value="{}-NexuxBot3".format(redver))
         em.add_field(name="Channels", value="{}".format(channels))
         em.add_field(name="Users", value="{}".format(users))
         em.add_field(name="Guilds", value="{}".format(servers))
