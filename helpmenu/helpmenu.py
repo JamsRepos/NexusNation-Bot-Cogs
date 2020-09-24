@@ -104,7 +104,7 @@ class HelpMenu(commands.Cog):
         )
         page2.add_field(name="Moderation Commands - set this!", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
-        # page2.add_field(name="Fun Commands", value=funcommands, inline=False)
+        page2.add_field(name="Nexus Commands", value=nexuscommands, inline=False)
         page2.add_field(
             name="Utility Commands - 15", value=utilitycommands, inline=False
         )
