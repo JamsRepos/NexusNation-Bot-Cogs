@@ -358,8 +358,8 @@ class Tips(commands.Cog):
     @commands.cooldown(1, 180, commands.BucketType.guild)
     async def vip(self, ctx):
         vip_embed = discord.Embed(color=0xff2f34)
-        vip_embed.set_author(name="VIP/VIP+ Information", url="https://thenexusnation.com/store/", icon_url="https://thenexusnation.com/img/logo.png")
-        vip_embed.add_field(name="Information", value="Purchase VIP or VIP+ by visiting the NexusNation [store](https://thenexusnation.com/store/).", inline=False)
+        vip_embed.set_author(name="VIP/VIP+ Information", url="https://nexushub.io/", icon_url="https://thenexusnation.com/img/logo.png")
+        vip_embed.add_field(name="Information", value="Purchase VIP or VIP+ by visiting the NexusNation [store](https://nexushub.io/).", inline=False)
         vip_embed.add_field(name="VIP Features", value="{}".format(self.vip_msg), inline=True)
         vip_embed.add_field(name="VIP +Features", value="{}".format(self.vipplus_msg), inline=True)
         vip_embed.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))

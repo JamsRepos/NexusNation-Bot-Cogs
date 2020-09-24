@@ -107,7 +107,7 @@ class Claim(commands.Cog):
     async def linksteam(self, ctx, userid):
         """Set your **User ID** for claiming your tokens.
         This can be found on your profile on our store.
-        **Visit your Profile:** https://thenexusnation.com/store/profile"""
+        **Visit your Profile:** https://nexushub.io/profile"""
         await self.config.member(ctx.author).steamid.set(userid)
         await ctx.send(f"You have chosen the **User ID** of **{userid}**. Please ensure this is the correct **User ID** on your Donation Store Profile.")
 
@@ -128,7 +128,7 @@ class Claim(commands.Cog):
         if (now - lastclaimdt).days < int(cooldown):
             return await ctx.send(f"You have already claimed recently. You have **{nextclaim}** days left until you can claim again.")
         if steamid == 0:
-            return await ctx.send(f"In order to claim **{amount}** tokens, please use **!linksteam** and ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://thenexusnation.com/store/")
+            return await ctx.send(f"In order to claim **{amount}** tokens, please use **!linksteam** and ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
         req = f"?hash={apikey}&steamid={steamid}&action=addCredits&amount={amount}"
         async with aiohttp.ClientSession() as session:
             async with session.get(url + req) as resp:
