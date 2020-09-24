@@ -52,7 +52,7 @@ class HelpMenu(commands.Cog):
         )
 
         since = ctx.bot.uptime.strftime("%d-%m-%y at %H:%M:%S")
-        title = "Nexus help menu:"
+        title = "Nexus Help Menu:"
         # emoji = ctx.bot.get_emoji(445640284202729472)
         author = ctx.author
         await ctx.tick()
@@ -114,7 +114,7 @@ class HelpMenu(commands.Cog):
         info = "Looking for more information like statistics? run `stats`."
         page3 = discord.Embed(description=info, colour=(await ctx.embed_colour()))
         page3.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
-        botowner = "Nexus Team"
+        botowner = "Nexus Hub"
         page3.add_field(name="Developers", value=botowner)
         page3.add_field(
             name="Libs",
