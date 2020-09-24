@@ -116,7 +116,7 @@ class Stats(commands.Cog):
         em.set_thumbnail(url=ctx.bot.user.avatar_url)
         em.add_field(name="Owner", value=botowner, inline=False)
         em.add_field(name="Discord.py", value="[{}](https://github.com/Rapptz/discord.py)".format(dpy_version))
-        em.add_field(name="Version", value="{}-NexusBot".format(redver))
+        em.add_field(name="Version", value="{}-NexusBotV3".format(redver))
         em.add_field(name="Channels", value="{}".format(channels))
         em.add_field(name="Users", value="{}".format(users))
         em.add_field(name="Guilds", value="{}".format(servers))
