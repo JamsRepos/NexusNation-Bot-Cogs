@@ -92,7 +92,7 @@ class HelpMenu(commands.Cog):
         moderationcommands = """`prune` `cleanup` `ban` `hackban` `ignore` `kick` `modset` `mute` `names` `rename` `slowmode` `softban` `tempban` `unban` `unignore` `unmute` `modlogsetup` `modlogset` `case` `casefor` `reason`"""
         musiccommands = """`audioset` `audiostats` `bump` `disconnect` `summon` `local` `np` `pause` `percent` `play` `playlist` `prev` `queue` `remove` `repeat` `search` `seek` `shuffle` `skip` `stop` `volume` `lyrics`"""
         nexuscommands = """`jb` `ttt`"""
-        utilitycommands = """`starboard` `customcom`  `filter` `filterset` `alias` `google` `away` `toggleaway` `gif` `imgtfy` `imgur` `covid` `color`"""
+        utilitycommands = """`starboard` `customcom`  `filter` `filterset` `autorole` `alias` `google` `away` `toggleaway` `gif` `imgtfy` `imgur` `covid` `color`"""
         page2 = discord.Embed(colour=(await ctx.embed_colour()))
         page2.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
         # page2.set_thumbnail(url=ctx.bot.user.avatar_url)
@@ -104,7 +104,7 @@ class HelpMenu(commands.Cog):
         )
         page2.add_field(name="Moderation Commands - set this!", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
-        page2.add_field(name="Nexus Commands", value=nexuscommands, inline=False)
+        page2.add_field(name="Nexus Commands - 2", value=nexuscommands, inline=False)
         page2.add_field(
             name="Utility Commands - 15", value=utilitycommands, inline=False
         )
