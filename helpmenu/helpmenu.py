@@ -42,8 +42,8 @@ class HelpMenu(commands.Cog):
         dpy_version = discord.__version__
         brambleid = "<@167990165258633216>"
         """Help is on the way"""
-        desc = """Hello, I am `Cicada`!
-        I am a moderation, music and fun bot packed with unique commands and fun features to offer!
+        desc = """Hello, I am `Nexus`!
+        I am a administration, utility, music and fun bot packed with unique commands and fun features to offer!
         I was written in Python using [`Discord.py`](https://github.com/Rapptz/discord.py) ({}) on the [`Red`](https://github.com/Cog-Creators/Red-DiscordBot) framework.
         If you want to invite me to your guild, click [`here`](https://discordapp.com/oauth2/authorize?client_id=192321118537777152&scope=bot&permissions=8) or use `invite`!
         
@@ -52,7 +52,7 @@ class HelpMenu(commands.Cog):
         )
 
         since = ctx.bot.uptime.strftime("%d-%m-%y at %H:%M:%S")
-        title = "Cicada help menu!"
+        title = "Nexus help menu:"
         # emoji = ctx.bot.get_emoji(445640284202729472)
         author = ctx.author
         await ctx.tick()
@@ -88,11 +88,11 @@ class HelpMenu(commands.Cog):
         page1.set_footer(text="Page 1/3 | Last restart: {}".format(since))
 
         # PAGE 2
-        generalcommands = """`ping` `avatar` `emoji` `snapchat` `rps` `runescape` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
-        # moderationcommands = """`prune` `cleanup` `ban` `hackban` `ignore` `kick` `modset` `mute` `names` `rename` `slowmode` `softban` `tempban` `unban` `unignore` `unmute` `modlogsetup` `modlogset` `case` `casefor` `reason`"""
+        generalcommands = """`ping` `avatar` `snapchat` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
+        moderationcommands = """`prune` `cleanup` `ban` `hackban` `ignore` `kick` `modset` `mute` `names` `rename` `slowmode` `softban` `tempban` `unban` `unignore` `unmute` `modlogsetup` `modlogset` `case` `casefor` `reason`"""
         musiccommands = """`audioset` `audiostats` `bump` `disconnect` `summon` `local` `np` `pause` `percent` `play` `playlist` `prev` `queue` `remove` `repeat` `search` `seek` `shuffle` `skip` `stop` `volume` `lyrics`"""
-        # funcommands = """`fortnite` `react` `textflip` `8` `choose` `flip` `imgtfy` `roll` `rps` `stopwatch` `urban` `hangman`"""
-        utilitycommands = """`weather` `starboard` `customcom`  `filter` `filterset` `alias` `cleanup` `google` `away` `toggleaway` `gif` `imgtfy` `imgur` `covid` `color`"""
+        nexuscommands = """`jb` `ttt`"""
+        utilitycommands = """`starboard` `customcom`  `filter` `filterset` `alias` `google` `away` `toggleaway` `gif` `imgtfy` `imgur` `covid` `color`"""
         page2 = discord.Embed(colour=(await ctx.embed_colour()))
         page2.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
         # page2.set_thumbnail(url=ctx.bot.user.avatar_url)
@@ -100,9 +100,9 @@ class HelpMenu(commands.Cog):
             name="Server prefix", value="`{}`".format((prefix_string)), inline=False
         )
         page2.add_field(
-            name="General Commands - 11", value=generalcommands, inline=False
+            name="General Commands - 9", value=generalcommands, inline=False
         )
-        # page2.add_field(name="Moderation Commands", value=moderationcommands, inline=False)
+        page2.add_field(name="Moderation Commands - set this!", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
         # page2.add_field(name="Fun Commands", value=funcommands, inline=False)
         page2.add_field(
@@ -114,8 +114,8 @@ class HelpMenu(commands.Cog):
         info = "Looking for more information like statistics? run `stats`."
         page3 = discord.Embed(description=info, colour=(await ctx.embed_colour()))
         page3.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
-        botowner = "<@!167990165258633216>"
-        page3.add_field(name="Owner", value=botowner)
+        botowner = "Nexus Team"
+        page3.add_field(name="Developers", value=botowner)
         page3.add_field(
             name="Libs",
             value="[`Discord.py`](https://github.com/Rapptz/discord.py)\n[`Red`](https://github.com/Cog-Creators/Red-DiscordBot)\n[`Lavalink.py`](https://github.com/Devoxin/Lavalink.py)",
