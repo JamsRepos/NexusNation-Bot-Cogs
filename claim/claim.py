@@ -107,7 +107,7 @@ class Claim(commands.Cog):
     async def linksteam(self, ctx, userid):
         """Set your **User ID** for claiming your tokens.
         This can be found on your profile on our store.
-        **Visit your Profile:** https://nexushub.io/profile"""
+        **Visit your Profile:** https://nexushub.io/profile.php"""
         await self.config.member(ctx.author).steamid.set(userid)
         await ctx.send(f"You have chosen the **User ID** of **{userid}**. Please ensure this is the correct **User ID** on your Donation Store Profile.")
 
