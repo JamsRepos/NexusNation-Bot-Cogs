@@ -119,12 +119,12 @@ class EmbedInvite(commands.Cog):
         embed.set_thumbnail(url=ctx.bot.user.avatar_url_as(static_format="png"))
         embed.add_field(
             name="Bot Invite",
-            value="https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions={}".format(
+            value="[`Invite Link`](https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions={})".format(
                 self.bot.user.id, permissions
             ),
         )
         if support:
-            embed.add_field(name="Support Server", value="{}".format(support_serv))
+            embed.add_field(name="Support Server", value="[`Discord Server`]({})".format(support_serv))
         embed.set_footer(
             text="{} made possible with the support of Red Discord Bot".format(
                 ctx.bot.user.display_name
