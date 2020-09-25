@@ -126,8 +126,7 @@ class EmbedInvite(commands.Cog):
         if support:
             embed.add_field(name="Support Server", value="[`Discord Server`]({})".format(support_serv))
         embed.set_footer(
-            text="{} made possible with the support of Red Discord Bot".format(
-                ctx.bot.user.display_name
+            text="NexusBot"
             ),
             icon_url="https://cdn.discordapp.com/icons/133049272517001216/83b39ff510bb7c3f5aeb51270af09ad3.webp",
         )
