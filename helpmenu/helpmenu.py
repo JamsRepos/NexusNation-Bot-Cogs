@@ -39,17 +39,16 @@ class HelpMenu(commands.Cog):
     @commands.command(hidden=True)
     # @commands.guild_only()
     async def help(self, ctx, *, command=None):
+        prefix_string = ctx.prefix
         dpy_version = discord.__version__
         brambleid = "<@167990165258633216>"
         """Help is on the way"""
         desc = """Hello, I am `Nexus`!
         I am a administration, utility, music and fun bot packed with unique commands and fun features to offer!
         I was written in Python using [`Discord.py`](https://github.com/Rapptz/discord.py) ({}) on the [`Red`](https://github.com/Cog-Creators/Red-DiscordBot) framework.
-        If you want to invite me to your guild, click [`here`](https://discordapp.com/oauth2/authorize?client_id=409819492655562767&scope=bot&permissions=8) or use `invite`!
+        If you want to invite me to your guild, click [`here`](https://discordapp.com/oauth2/authorize?client_id=409819492655562767&scope=bot&permissions=8) or use `{}invite`!
         
-        Here you will find pages of my different sections and the commands in them.""".format(
-            dpy_version
-        )
+        Here you will find pages of my different sections and the commands in them.""".format(dpy_version, prefix_string)
 
         since = ctx.bot.uptime.strftime("%d-%m-%y at %H:%M:%S")
         title = "Nexus Help Menu:"
@@ -58,20 +57,6 @@ class HelpMenu(commands.Cog):
         await ctx.tick()
         message = "test"
         Test = None
-
-        # if ctx.guild:
-        # prefixes = await ctx.bot.get_valid_prefixes(ctx.guild)
-        # else:
-        # prefixes = None  # This is correct. The below can happen in a guild.
-        # if not prefixes:
-        # prefixes = await ctx.bot.db.prefix()
-
-        # prefix_string = " ".join(prefixes)
-        # prefix_string = await ctx.bot.get_valid_prefixes(ctx.guild)
-        prefix_string = ctx.prefix
-        # prefix_string2 = prefix_string1.strip()
-        # prefix_string = prefix_string.strip()
-        # prefix_string = prefix_string.replace("'", "")
 
         connections = len(lavalink.all_players())
         if connections == 0:
@@ -82,10 +67,10 @@ class HelpMenu(commands.Cog):
         # PAGE 1
         page1 = discord.Embed(description=desc, colour=(await ctx.embed_colour()))
         page1.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
-        page1.add_field(name="Server prefix", value="`{}`".format(prefix_string))
+        page1.add_field(name="Server Prefix", value="`{}`".format(prefix_string))
         page1.set_thumbnail(url=ctx.bot.user.avatar_url)
         page1.add_field(name="Streams", value=connections)
-        page1.set_footer(text="Page 1/3 | Last restart: {}".format(since))
+        page1.set_footer(text="Page 1/3 | Last Restart: {}".format(since))
 
         # PAGE 2
         generalcommands = """`ping` `avatar` `snapchat` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
@@ -97,7 +82,7 @@ class HelpMenu(commands.Cog):
         page2.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
         # page2.set_thumbnail(url=ctx.bot.user.avatar_url)
         page2.add_field(
-            name="Server prefix", value="`{}`".format((prefix_string)), inline=False
+            name="Server Prefix", value="`{}`".format((prefix_string)), inline=False
         )
         page2.add_field(
             name="General Commands - 9", value=generalcommands, inline=False
@@ -108,10 +93,10 @@ class HelpMenu(commands.Cog):
         page2.add_field(
             name="Utility Commands - 15", value=utilitycommands, inline=False
         )
-        page2.set_footer(text="Page 2/3 | Last restart: {}".format(since))
+        page2.set_footer(text="Page 2/3 | Last Restart: {}".format(since))
 
         # PAGE 3
-        info = "Looking for more information like statistics? run `stats`."
+        info = "Looking for more information like statistics? Run `{}stats`.".format((prefix_string))
         page3 = discord.Embed(description=info, colour=(await ctx.embed_colour()))
         page3.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
         botowner = "Nexus Hub"
@@ -121,7 +106,7 @@ class HelpMenu(commands.Cog):
             value="[`Discord.py`](https://github.com/Rapptz/discord.py)\n[`Red`](https://github.com/Cog-Creators/Red-DiscordBot)\n[`Lavalink.py`](https://github.com/Devoxin/Lavalink.py)",
         )
         # page4.add_field(name="Source", value="[Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot)")
-        page3.set_footer(text=f"Page 3/3 | Last restart: {since}")
+        page3.set_footer(text=f"Page 3/3 | Last Restart: {since}")
 
         embeds = [page1, page2, page3]
         if command == "all":
