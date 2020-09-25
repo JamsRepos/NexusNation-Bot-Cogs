@@ -6,7 +6,7 @@ def connect(db, query):
         connection = mysql.connector.connect(
         host='localhost',
         database=db,
-        user='',
+        user='webserver',
         password='')
         if connection.is_connected():
             cursor = connection.cursor()
