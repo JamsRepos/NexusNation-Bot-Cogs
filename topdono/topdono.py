@@ -7,6 +7,12 @@ import json
 from redbot.core import commands
 from redbot.core import checks, Config
 
+def guild_check():
+    async def checker(ctx):
+        if ctx.message.guild.id == 269912749327253504:
+            return True
+    return commands.check(checker)
+
 class TopDonator(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -19,22 +25,25 @@ class TopDonator(commands.Cog):
         self.config.register_global(**default_global)
 
     @commands.command(name="donorole")
+    @guild_check()
     @commands.has_permissions(manage_roles=True)
     async def settopdonorole(self, ctx, role: discord.Role):
         await self.config.donator_role.set(role.id)
-        await ctx.send(f"Top donator role set as <@&{role}>")
+        await ctx.send(f"Top donator role set as <@&{role.id}>")
 
     @commands.command(name="viprole")
+    @guild_check()
     @commands.has_permissions(manage_roles=True)
     async def setviprole(self, ctx, role: discord.Role):
         await self.config.vip_role.set(role.id)
-        await ctx.send(f"VIP role set as <@&{role}>")
+        await ctx.send(f"VIP role set as <@&{role.id}>")
 
     @commands.command(name="vipplusrole")
+    @guild_check()
     @commands.has_permissions(manage_roles=True)
     async def setvipplusrole(self, ctx, role: discord.Role):
         await self.config.vip_plus_role.set(role.id)
-        await ctx.send(f"VIP+ role set as <@&{role}>")
+        await ctx.send(f"VIP+ role set as <@&{role.id}>")
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
