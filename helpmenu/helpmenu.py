@@ -82,10 +82,10 @@ class HelpMenu(commands.Cog):
         # PAGE 1
         page1 = discord.Embed(description=desc, colour=(await ctx.embed_colour()))
         page1.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
-        page1.add_field(name="Server prefix", value="`{}`".format(prefix_string))
+        page1.add_field(name="Server Prefix", value="`{}`".format(prefix_string))
         page1.set_thumbnail(url=ctx.bot.user.avatar_url)
         page1.add_field(name="Streams", value=connections)
-        page1.set_footer(text="Page 1/3 | Last restart: {}".format(since))
+        page1.set_footer(text="Page 1/3 | Last Restart: {}".format(since))
 
         # PAGE 2
         generalcommands = """`ping` `avatar` `snapchat` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
@@ -97,7 +97,7 @@ class HelpMenu(commands.Cog):
         page2.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
         # page2.set_thumbnail(url=ctx.bot.user.avatar_url)
         page2.add_field(
-            name="Server prefix", value="`{}`".format((prefix_string)), inline=False
+            name="Server Prefix", value="`{}`".format((prefix_string)), inline=False
         )
         page2.add_field(
             name="General Commands - 9", value=generalcommands, inline=False
@@ -108,10 +108,10 @@ class HelpMenu(commands.Cog):
         page2.add_field(
             name="Utility Commands - 15", value=utilitycommands, inline=False
         )
-        page2.set_footer(text="Page 2/3 | Last restart: {}".format(since))
+        page2.set_footer(text="Page 2/3 | Last Restart: {}".format(since))
 
         # PAGE 3
-        info = "Looking for more information like statistics? run `stats`."
+        info = "Looking for more information like statistics? Run `{}stats`.".format((prefix_string))
         page3 = discord.Embed(description=info, colour=(await ctx.embed_colour()))
         page3.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
         botowner = "Nexus Hub"
@@ -121,7 +121,7 @@ class HelpMenu(commands.Cog):
             value="[`Discord.py`](https://github.com/Rapptz/discord.py)\n[`Red`](https://github.com/Cog-Creators/Red-DiscordBot)\n[`Lavalink.py`](https://github.com/Devoxin/Lavalink.py)",
         )
         # page4.add_field(name="Source", value="[Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot)")
-        page3.set_footer(text=f"Page 3/3 | Last restart: {since}")
+        page3.set_footer(text=f"Page 3/3 | Last Restart: {since}")
 
         embeds = [page1, page2, page3]
         if command == "all":
