@@ -45,11 +45,9 @@ class HelpMenu(commands.Cog):
         desc = """Hello, I am `Nexus`!
         I am a administration, utility, music and fun bot packed with unique commands and fun features to offer!
         I was written in Python using [`Discord.py`](https://github.com/Rapptz/discord.py) ({}) on the [`Red`](https://github.com/Cog-Creators/Red-DiscordBot) framework.
-        If you want to invite me to your guild, click [`here`](https://discordapp.com/oauth2/authorize?client_id=409819492655562767&scope=bot&permissions=8) or use `invite`!
+        If you want to invite me to your guild, click [`here`](https://discordapp.com/oauth2/authorize?client_id=409819492655562767&scope=bot&permissions=8) or use `{}invite`!
         
-        Here you will find pages of my different sections and the commands in them.""".format(
-            dpy_version
-        )
+        Here you will find pages of my different sections and the commands in them.""".format(dpy_version, prefix_string)
 
         since = ctx.bot.uptime.strftime("%d-%m-%y at %H:%M:%S")
         title = "Nexus Help Menu:"
