@@ -126,6 +126,7 @@ class EmbedInvite(commands.Cog):
         if support:
             embed.add_field(name="Support Server", value="[`Discord Server`]({})".format(support_serv))
         await ctx.send(embed=embed)
+        await ctx.tick()
 
 
 def setup(bot):
