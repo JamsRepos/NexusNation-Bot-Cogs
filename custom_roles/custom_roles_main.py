@@ -5,6 +5,12 @@ from redbot.core import checks, Config
 from discord.ext import tasks
 
 
+def guild_check():
+    async def checker(ctx):
+        if ctx.message.guild.id == 269912749327253504:
+            return True
+    return commands.check(checker)
+
 def role_check():
     async def checker(ctx):
         '''
@@ -71,6 +77,7 @@ class CustomRoles(commands.Cog):
     ...
     @commands.command(name="role")
     @role_check()
+    @guild_check()
     async def set_custom_role(self, ctx, role_colour: str = "ffffff", *, role_name: str = "MyCustomRole"):
         if role_name.lower() not in await self.config.guild(ctx.guild).disallowed_role_names() and len(role_name.lower()) <= 32:
             deleterole=False
@@ -123,6 +130,7 @@ class CustomRoles(commands.Cog):
             await ctx.send("You cannot create a role with that name.")
     ...
     @commands.command()
+    @guild_check()
     @commands.has_permissions(manage_roles=True)
     async def disallowrolename(self, ctx, *, role_name:str):
         async with self.config.guild(ctx.guild).disallowed_role_names() as roles:
@@ -130,6 +138,7 @@ class CustomRoles(commands.Cog):
         await ctx.send(f"Added **{role_name}** to the disallowed custom role names list")
     ...
     @commands.command()
+    @guild_check()
     @commands.has_permissions(manage_roles=True)
     async def allowrolename(self, ctx, *, role_name: str):
         async with self.config.guild(ctx.guild).disallowed_role_names() as roles:
@@ -140,6 +149,7 @@ class CustomRoles(commands.Cog):
                 await ctx.send(f"**{role_name.lower()}** is not in the disallowed custom role names list")
     ...
     @commands.command()
+    @guild_check()
     @commands.has_permissions(manage_roles=True)
     async def removememberrole(self, ctx, member: discord.Member, *, reason: str = "No reason given"):
         try:
