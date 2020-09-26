@@ -154,19 +154,23 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="Total Points",
-        value=stats[0]
+        value=stats[0],
+        inline=True,
     )
     embed.add_field(
         name="Top 10 Records",
-        value=top10string
+        value=top10string,
+        inline=True,
     )
     embed.add_field(
         name="Records",
-        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
+        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}",
+        inline=True
     )
     embed.add_field(
         name="Completed",
-        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}"
+        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}",
+        inline=True
     )
     await ctx.send(embed=embed)
 
@@ -267,6 +271,8 @@ class QueryTNN(commands.Cog):
                     await tttStats(ctx, result, member)
                 except Exception as e:
                     await ctx.send(f"> TTT stats for {member.mention} not found")
+
+
 
         except Error as e:
             print("Error while connecting to MySQL", e)
