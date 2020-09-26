@@ -266,8 +266,8 @@ class QueryTNN(commands.Cog):
         if ctx.invoked_subcommand is None:
             pass
     
-    @ttt_commands.command()
-    async def stats(self, ctx, member: discord.Member = None):
+    @ttt_commands.command(name="stats")
+    async def ttt_stats(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
         try:
@@ -294,13 +294,13 @@ class QueryTNN(commands.Cog):
         except Error as e:
             print("Error while connecting to MySQL", e)
 
-    @commands.group(name="surf", pass_context=True)
+    @commands.group(name="surf")
     async def surf_commands(self, ctx):
         if ctx.invoked_subcommand is None:
             pass
     
-    @surf_commands.command(pass_context=True)
-    async def stats(self, ctx, style = None, member: discord.Member = None):
+    @surf_commands.command(name="stats")
+    async def surf_stats(self, ctx, style = None, member: discord.Member = None):
         if member is None:
             member = ctx.author
         if style is None:
@@ -350,8 +350,8 @@ class QueryTNN(commands.Cog):
         if ctx.invoked_subcommand is None:
             pass
     
-    @bhop_commands.command()
-    async def stats(self, ctx, style = None, member: discord.Member = None):
+    @bhop_commands.command(name="stats")
+    async def bhop_stats(self, ctx, style = None, member: discord.Member = None):
         if member is None:
             member = ctx.author
         if style is None:
