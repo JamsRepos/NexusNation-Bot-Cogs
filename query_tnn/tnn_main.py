@@ -135,6 +135,8 @@ async def surfStats(ctx, stats, member):
     joined = datetime.datetime.fromtimestamp(int(stats[11])).strftime('%d-%m-%Y @ %H:%M:%S')
     timealive = datetime.timedelta(seconds=stats[13])
     connections = stats[13]
+    country = stats[14]
+    country = country.replace("The ","") 
 
     if wrpoints > 0:
         top10string = f"{top10s} - [{top10points}+{wrpoints}]"
@@ -180,6 +182,10 @@ async def surfStats(ctx, stats, member):
     embed.add_field(
         name="Completed",
         value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}"
+    )
+    embed.add_field(
+        name="Country",
+        value=country
     )
     await ctx.send(embed=embed)
 
@@ -326,7 +332,7 @@ class QueryTNN(commands.Cog):
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
                     community_id = result[0]
-                    cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
+                    cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections, country FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await surfStats(ctx, result, member)
                 except Exception as e:
