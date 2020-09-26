@@ -245,6 +245,8 @@ class QueryTNN(commands.Cog):
     async def stats(self, ctx, member: discord.Member = None, style="normal"):
         if member is None:
             member = ctx.author
+        if style is "normal":
+            styleint = 0
         try:
             connection = mysql.connector.connect(
                 host='localhost',
@@ -258,11 +260,7 @@ class QueryTNN(commands.Cog):
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
                     community_id = result[0]
-                    if style is "normal":
-                        styleint = 0
-                    await ctx.send(community_id)
-                    await ctx.send(member.id)
-                    cursor.execute(f"SELECT rounds_played, rounds_won, shots_fired, damage_given, damage_taken, killed_innocents, killed_traitors, killed_detectives, scanned_traitors FROM `ttt`.`ttt_stats` WHERE communityid = '{community_id}';")
+                    cursor.execute(f"SELECT country FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await ctx.send(result)
                     await surfStats(ctx, result, member)
