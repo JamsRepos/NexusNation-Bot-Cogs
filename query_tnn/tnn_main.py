@@ -139,10 +139,10 @@ async def surfStats(ctx, stats, member):
     groups = stats[15]
     lastseen = stats[16]
 
-    if wrpoints > 0:
+    top10string = "{} - [{}+{}]".format(top10s, top10points)
+
+    if (wrpoints > 0):
         top10string = "{} - [{}+{}]".format(top10s, top10points, wrpoints)
-    else:
-        top10string = "{} - [{}+{}]".format(top10s, top10points)
     
     embed = discord.Embed(
         timestamp = datetime.datetime.utcnow(), 
