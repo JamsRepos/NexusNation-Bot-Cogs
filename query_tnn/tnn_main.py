@@ -164,11 +164,13 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="Records",
-        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
+        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}",
+        inline=False
     )
     embed.add_field(
         name="Completed",
-        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}"
+        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}",
+        inline=False
     )
     await ctx.send(embed=embed)
 
