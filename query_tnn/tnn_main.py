@@ -155,12 +155,10 @@ async def surfStats(ctx, stats, member):
     embed.add_field(
         name="Total Points",
         value=stats[0],
-        inline=True,
     )
     embed.add_field(
         name="Top 10 Records",
         value=top10string,
-        inline=True,
     )
     embed.add_field(
         name="Records",
