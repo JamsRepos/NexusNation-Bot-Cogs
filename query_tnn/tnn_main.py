@@ -121,6 +121,29 @@ async def tttStats(ctx, stats, member):
     await ctx.send(embed=embed)
 
 async def surfStats(ctx, stats, member):
+    points = stats[0]
+    wrpoints = stats[1]
+    wrbpoints = stats[2]
+    wrcppoints = stats[3]
+    top10points = stats[4]
+    groupspoints = stats[5]
+    mappoints = stats[6]
+    bonuspoints = stats[7]
+    finishedmapspro = stats[8]
+    finishedbonuses = stats[9]
+    finishedstages = stats[10]
+    wrs = stats[11]
+    wrbs = stats[12]
+    wrcps = stats[13]
+    top10s = stats[14]
+    groups = stats[15]
+    lastseen = stats[16]
+
+    top10string = "{} - [{}+{}]".format(top10s, top10points)
+
+    if (wrpoints > 0):
+        top10string = "{} - [{}+{}]".format(top10s, top10points, wrpoints)
+    
     embed = discord.Embed(
         timestamp = datetime.datetime.utcnow(), 
         colour=0xff0000
@@ -135,7 +158,7 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="Top 10",
-        value=stats[0]
+        value=top10string
     )
     await ctx.send(embed=embed)
 
