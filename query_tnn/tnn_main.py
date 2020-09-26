@@ -262,7 +262,7 @@ class QueryTNN(commands.Cog):
                         styleint = 0
                     await ctx.send(community_id)
                     await ctx.send(member.id)
-                    cursor.execute(f"SELECT country, points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, groups, lastseen FROM `surf`.`ck_playerrank` WHERE steamid = '{communityid}' AND style = '{styleint}';")
+                    cursor.execute(f"SELECT country FROM `surf`.`ck_playerrank` WHERE steamid = '{communityid}' AND style = '0';")
                     result = cursor.fetchone()
                     await ctx.send(result)
                     await surfStats(ctx, result, member)
