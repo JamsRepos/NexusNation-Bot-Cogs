@@ -120,7 +120,7 @@ async def tttStats(ctx, stats, member):
     )
     await ctx.send(embed=embed)
 
-async def surfStats(ctx, stats, member):
+async def surfbhopStats(ctx, stats, member):
     points = stats[0]
     wrpoints = stats[1]
     top10points = stats[2]
@@ -287,7 +287,7 @@ class QueryTNN(commands.Cog):
                     result = cursor.fetchone()
                     await tttStats(ctx, result, member)
                 except Exception as e:
-                    await ctx.send(f"> TTT stats for {member.mention} not found")
+                    await ctx.send(f"> TTT stats for {member.mention} not found.")
 
 
 
@@ -338,9 +338,60 @@ class QueryTNN(commands.Cog):
                     community_id = result[0]
                     cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections, country, style FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
-                    await surfStats(ctx, result, member)
+                    await surfbhopStats(ctx, result, member)
                 except Exception as e:
-                    await ctx.send(f"> Surf stats for {member.mention} not found")
+                    await ctx.send(f"> Surf stats for {member.mention} not found.")
+
+        except Error as e:
+            print("Error while connecting to MySQL", e)
+
+    @commands.group(name="bhop")
+    async def bhop_commands(self, ctx):
+        if ctx.invoked_subcommand is None:
+            pass
+    
+    @bhop_commands.command()
+    async def stats(self, ctx, style = None, member: discord.Member = None):
+        if member is None:
+            member = ctx.author
+        if style is None:
+            prefix = ctx.prefix
+            await ctx.send(f"> No style specified, please use ``n``, ``sw``, ``hsw``, ``bw``, ``lg``, ``sm``, ``ff``, ``fs``.\n> Example: ``{prefix}bhop stats hsw``.")
+            return
+        if style == "n":
+            styleint = 0
+        if style == "sw":
+            styleint = 1
+        if style == "hsw":
+            styleint = 2
+        if style == "bw":
+            styleint = 3
+        if style == "lg":
+            styleint = 4
+        if style == "sm":
+            styleint = 5
+        if style == "ff":
+            styleint = 6
+        if style == "fs":
+            styleint = 7
+        try:
+            connection = mysql.connector.connect(
+                host='localhost',
+                database='discord_integration',
+                user='webserver',
+                password=self.pwd)
+            if connection.is_connected():
+                names = []
+                cursor = connection.cursor()
+                try:
+                    cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
+                    result = cursor.fetchone()
+                    community_id = result[0]
+                    cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections, country, style FROM `bhop`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
+                    result = cursor.fetchone()
+                    await surfbhopStats(ctx, result, member)
+                except Exception as e:
+                    await ctx.send(f"> Bhop stats for {member.mention} not found.")
 
         except Error as e:
             print("Error while connecting to MySQL", e)
