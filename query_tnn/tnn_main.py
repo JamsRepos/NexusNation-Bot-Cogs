@@ -120,6 +120,21 @@ async def tttStats(ctx, stats, member):
     )
     await ctx.send(embed=embed)
 
+async def surfStats(ctx, stats, member):
+    embed = discord.Embed(
+        timestamp = datetime.datetime.utcnow(), 
+        colour=0xff0000
+    )
+    embed.set_author(
+        name=f"{member} Surf Stats",
+        icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
+    )
+    embed.add_field(
+        name="Country",
+        value=stats[0]
+    )
+    await ctx.send(embed=embed)
+
 class QueryTNN(commands.Cog):
     __author__ = "Raff"
     __version__ = "1.0.0"
@@ -218,7 +233,38 @@ class QueryTNN(commands.Cog):
                 except Exception as e:
                     await ctx.send(f"> TTT stats for {member.mention} not found")
 
+        except Error as e:
+            print("Error while connecting to MySQL", e)
 
+    @commands.group(name="surf")
+    async def surf_commands(self, ctx):
+        if ctx.invoked_subcommand is None:
+            pass
+    
+    @surf_commands.command()
+    async def stats(self, ctx, member: discord.Member = None, style="normal"):
+        if member is None:
+            member = ctx.author
+        try:
+            connection = mysql.connector.connect(
+                host='localhost',
+                database='discord_integration',
+                user='webserver',
+                password=self.pwd)
+            if connection.is_connected():
+                names = []
+                cursor = connection.cursor()
+                try:
+                    cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
+                    result = cursor.fetchone()
+                    community_id = communityid_converter(result[0])
+                    if style is "normal":
+                        styleint = 0
+                    cursor.execute(f"SELECT country, points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen FROM ck_playerrank WHERE steamid64 = '{communityid}' AND style = '{styleint}';")
+                    result = cursor.fetchone()
+                    await surfStats(ctx, result, member)
+                except Exception as e:
+                    await ctx.send(f"> Surf stats for {member.mention} not found")
 
         except Error as e:
             print("Error while connecting to MySQL", e)
