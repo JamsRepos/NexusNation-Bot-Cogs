@@ -121,24 +121,20 @@ async def tttStats(ctx, stats, member):
     await ctx.send(embed=embed)
 
 async def surfStats(ctx, stats, member):
-    points = stats[0]
-    wrpoints = stats[1]
-    wrbpoints = stats[2]
-    wrcppoints = stats[3]
-    top10points = stats[4]
-    groupspoints = stats[5]
-    mappoints = stats[6]
-    bonuspoints = stats[7]
-    finishedmapspro = stats[8]
-    finishedbonuses = stats[9]
-    finishedstages = stats[10]
-    wrs = stats[11]
-    wrbs = stats[12]
-    wrcps = stats[13]
-    top10s = stats[14]
-    groups = stats[15]
-    lastseen = datetime.datetime.fromtimestamp(int(stats[16])).strftime('%d-%m-%Y @ %H:%M:%S')
-    joined = datetime.datetime.fromtimestamp(int(stats[17])).strftime('%d-%m-%Y @ %H:%M:%S')
+    points = stats[0]:,
+    wrpoints = stats[1]:,
+    top10points = stats[3]:,
+    finishedmapspro = stats[4]:,
+    finishedbonuses = stats[5]:,
+    finishedstages = stats[6]:,
+    wrs = stats[7]:,
+    wrbs = stats[8]:,
+    wrcps = stats[9]:,
+    top10s = stats[10]:,
+    lastseen = datetime.datetime.fromtimestamp(int(stats[11])).strftime('%d-%m-%Y @ %H:%M:%S')
+    joined = datetime.datetime.fromtimestamp(int(stats[12])).strftime('%d-%m-%Y @ %H:%M:%S')
+    timealive = str(timedelta(seconds=stats[13]))
+    connections = stats[14]:,
 
     if wrpoints > 0:
         top10string = f"{top10s} - [{top10points}+{wrpoints}]"
@@ -155,7 +151,7 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="Total Points",
-        value=stats[0]
+        value=points
     )
     embed.add_field(
         name="Top 10 Records",
@@ -163,17 +159,23 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="First Joined",
-        value=joined,
-        inline=False
+        value=joined
     )
     embed.add_field(
         name="Last Online",
         value=lastseen
     )
     embed.add_field(
+        name="Time Played",
+        value=timealive
+    )
+    embed.add_field(
+        name="Total Connections",
+        value=connections
+    )
+    embed.add_field(
         name="Records",
-        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}",
-        inline=False
+        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
     )
     embed.add_field(
         name="Completed",
@@ -324,7 +326,7 @@ class QueryTNN(commands.Cog):
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
                     community_id = result[0]
-                    cursor.execute(f"SELECT points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen, joined FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
+                    cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await surfStats(ctx, result, member)
                 except Exception as e:
