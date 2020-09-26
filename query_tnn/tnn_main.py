@@ -161,10 +161,6 @@ async def surfStats(ctx, stats, member):
         value=top10string
     )
     embed.add_field(
-        name="Map Improvement Points",
-        value=f"{groups} - [{groupspoints}]"
-    )
-    embed.add_field(
         name="Records",
         value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
     )
