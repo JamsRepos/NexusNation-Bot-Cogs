@@ -130,7 +130,7 @@ async def surfStats(ctx, stats, member):
         icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
     )
     embed.add_field(
-        name="Country",
+        name="Points",
         value=stats[0]
     )
     await ctx.send(embed=embed)
@@ -242,11 +242,27 @@ class QueryTNN(commands.Cog):
             pass
     
     @surf_commands.command()
-    async def stats(self, ctx, member: discord.Member = None, style="normal"):
+    async def stats(self, ctx, member: discord.Member = None, style = None):
         if member is None:
             member = ctx.author
-        if style is "normal":
+        if style is None:
+            prefix = ctx.prefix
+            await ctx.send(f"> No style specified, please use ``n``, ``sw``, ``hsw``, ``bw``, ``lg``, ``ff``, ``fs``.\nExample: {prefix}surf stats hsw.")
+            return
+        if style is "n":
             styleint = 0
+        if style is "sw":
+            styleint = 1
+        if style is "hsw":
+            styleint = 2
+        if style is "bw":
+            styleint = 3
+        if style is "lg":
+            styleint = 4
+        if style is "ff":
+            styleint = 5
+        if style is "fs":
+            styleint = 6
         try:
             connection = mysql.connector.connect(
                 host='localhost',
@@ -260,9 +276,8 @@ class QueryTNN(commands.Cog):
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
                     community_id = result[0]
-                    cursor.execute(f"SELECT country FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
+                    cursor.execute(f"SELECT points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
-                    await ctx.send(result)
                     await surfStats(ctx, result, member)
                 except Exception as e:
                     await ctx.send(f"> Surf stats for {member.mention} not found")
