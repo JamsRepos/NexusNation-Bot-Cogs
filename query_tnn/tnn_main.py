@@ -138,6 +138,7 @@ async def surfStats(ctx, stats, member):
     top10s = stats[14]
     groups = stats[15]
     lastseen = datetime.datetime.fromtimestamp(int(stats[16])).strftime('%d-%m-%Y @ %H:%M:%S')
+    joined = datetime.datetime.fromtimestamp(int(stats[17])).strftime('%d-%m-%Y @ %H:%M:%S')
 
     if wrpoints > 0:
         top10string = f"{top10s} - [{top10points}+{wrpoints}]"
@@ -154,18 +155,19 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="Total Points",
-        value=stats[0],
-        inline=False
+        value=stats[0]
     )
     embed.add_field(
         name="Top 10 Records",
-        value=top10string,
-        inline=False
+        value=top10string
+    )
+    embed.add_field(
+        name="First Joined",
+        value=joined
     )
     embed.add_field(
         name="Last Online",
-        value=lastseen,
-        inline=False
+        value=lastseen
     )
     embed.add_field(
         name="Records",
@@ -320,7 +322,7 @@ class QueryTNN(commands.Cog):
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
                     community_id = result[0]
-                    cursor.execute(f"SELECT points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
+                    cursor.execute(f"SELECT points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen, joined FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await surfStats(ctx, result, member)
                 except Exception as e:
