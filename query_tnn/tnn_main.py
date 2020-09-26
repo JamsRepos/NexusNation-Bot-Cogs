@@ -262,7 +262,7 @@ class QueryTNN(commands.Cog):
                         styleint = 0
                     await ctx.send(community_id)
                     await ctx.send(member.id)
-                    cursor.execute(f"SELECT country FROM `surf`.`ck_playerrank` WHERE steamid = '{communityid}' AND style = 0;")
+                    cursor.execute(f"SELECT rounds_played, rounds_won, shots_fired, damage_given, damage_taken, killed_innocents, killed_traitors, killed_detectives, scanned_traitors FROM `ttt`.`ttt_stats` WHERE communityid = '{community_id}';")
                     result = cursor.fetchone()
                     await ctx.send(result)
                     await surfStats(ctx, result, member)
