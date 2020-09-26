@@ -136,7 +136,9 @@ async def surfStats(ctx, stats, member):
     timealive = datetime.timedelta(seconds=stats[13])
     connections = stats[13]
     country = stats[14]
-    country = country.replace("The ","") 
+    country = country.replace("The ","")
+    style = stats[15]
+    styles = ["Normal", "Sideways", "Half-Sideways", "Backwards", "Low-Gravity", "Slow Motion", "Fast Forward", "Freestyle"]    
 
     if wrpoints > 0:
         top10string = f"{top10s} - [{top10points}+{wrpoints}]"
@@ -148,7 +150,7 @@ async def surfStats(ctx, stats, member):
         colour=0xff0000
     )
     embed.set_author(
-        name=f"{member} Surf Stats",
+        name=f"{member} {styles[style]} Surf Stats",
         icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
     )
     embed.add_field(
@@ -332,7 +334,7 @@ class QueryTNN(commands.Cog):
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
                     community_id = result[0]
-                    cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections, country FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
+                    cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections, country, style FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await surfStats(ctx, result, member)
                 except Exception as e:
