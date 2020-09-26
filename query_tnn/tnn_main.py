@@ -133,7 +133,7 @@ async def surfStats(ctx, stats, member):
     top10s = stats[9]
     lastseen = datetime.datetime.fromtimestamp(int(stats[10])).strftime('%d-%m-%Y @ %H:%M:%S')
     joined = datetime.datetime.fromtimestamp(int(stats[11])).strftime('%d-%m-%Y @ %H:%M:%S')
-    timealive = stats[12]
+    timealive = timedelta(seconds=stats[13])
     connections = stats[13]
 
     if wrpoints > 0:
@@ -158,16 +158,16 @@ async def surfStats(ctx, stats, member):
         value=top10string
     )
     embed.add_field(
+        name="Time Played",
+        value=timealive
+    )
+    embed.add_field(
         name="First Joined",
         value=joined
     )
     embed.add_field(
         name="Last Online",
         value=lastseen
-    )
-    embed.add_field(
-        name="Time Played",
-        value=timealive
     )
     embed.add_field(
         name="Total Connections",
