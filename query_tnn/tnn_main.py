@@ -160,20 +160,8 @@ async def surfStats(ctx, stats, member):
         value=top10string
     )
     embed.add_field(
-        name="Time Played",
-        value=timealive
-    )
-    embed.add_field(
-        name="First Joined",
-        value=joined
-    )
-    embed.add_field(
-        name="Last Online",
-        value=lastseen
-    )
-    embed.add_field(
-        name="Total Connections",
-        value=connections
+        name="Country",
+        value=country
     )
     embed.add_field(
         name="Records",
@@ -184,8 +172,20 @@ async def surfStats(ctx, stats, member):
         value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}"
     )
     embed.add_field(
-        name="Country",
-        value=country
+        name="Total Connections",
+        value=connections
+    )
+    embed.add_field(
+        name="First Joined",
+        value=joined
+    )
+    embed.add_field(
+        name="Last Online",
+        value=lastseen
+    )
+    embed.add_field(
+        name="Time Played",
+        value=timealive
     )
     await ctx.send(embed=embed)
 
