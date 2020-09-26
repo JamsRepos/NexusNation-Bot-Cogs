@@ -133,7 +133,7 @@ async def surfStats(ctx, stats, member):
     top10s = stats[9]
     lastseen = datetime.datetime.fromtimestamp(int(stats[10])).strftime('%d-%m-%Y @ %H:%M:%S')
     joined = datetime.datetime.fromtimestamp(int(stats[11])).strftime('%d-%m-%Y @ %H:%M:%S')
-    timealive = timedelta(seconds=stats[13])
+    timealive = datetime.timedelta(seconds=stats[13])
     connections = stats[13]
 
     if wrpoints > 0:
