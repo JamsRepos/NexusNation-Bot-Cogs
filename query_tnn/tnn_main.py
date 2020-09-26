@@ -257,11 +257,11 @@ class QueryTNN(commands.Cog):
                 try:
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
-                    community_id = communityid_converter(result[0])
+                    community_id = result[0]
                     if style is "normal":
                         styleint = 0
                     await ctx.send(styleint)
-                    cursor.execute(f"SELECT country, points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen FROM ck_playerrank WHERE steamid64 = '{communityid}' AND style = '{styleint}';")
+                    cursor.execute(f"SELECT country, points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen FROM surf.ck_playerrank WHERE steamid = '{communityid}' AND style = '{styleint}';")
                     result = cursor.fetchone()
                     await surfStats(ctx, result, member)
                 except Exception as e:
