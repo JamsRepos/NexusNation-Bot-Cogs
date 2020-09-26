@@ -139,28 +139,28 @@ async def surfStats(ctx, stats, member):
     groups = stats[15]
     lastseen = stats[16]
 
-    top10string = "{} - [{}+{}]".format(top10s, top10points)
-
-    if (wrpoints > 0):
+    if wrpoints > 0:
         top10string = "{} - [{}+{}]".format(top10s, top10points, wrpoints)
+    else:
+        top10string = "{} - [{}+{}]".format(top10s, top10points)
     
-    embed = discord.Embed(
-        timestamp = datetime.datetime.utcnow(), 
-        colour=0xff0000
-    )
-    embed.set_author(
-        name=f"{member} Surf Stats",
-        icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
-    )
-    embed.add_field(
-        name="Points",
-        value=stats[0]
-    )
-    embed.add_field(
-        name="Top 10",
-        value=top10string
-    )
-    await ctx.send(embed=embed)
+        embed = discord.Embed(
+            timestamp = datetime.datetime.utcnow(), 
+            colour=0xff0000
+        )
+        embed.set_author(
+            name=f"{member} Surf Stats",
+            icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
+        )
+        embed.add_field(
+            name="Points",
+            value=stats[0]
+        )
+        embed.add_field(
+            name="Top 10",
+            value=top10string
+        )
+        await ctx.send(embed=embed)
 
 class QueryTNN(commands.Cog):
     __author__ = "Raff"
