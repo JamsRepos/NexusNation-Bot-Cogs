@@ -299,8 +299,8 @@ class QueryTNN(commands.Cog):
         if ctx.invoked_subcommand is None:
             pass
     
-    @surf_commands.command()
-    async def stats(self, style = None, member: discord.Member = None):
+    @surf_commands.command(pass_context=True)
+    async def stats(self, ctx, style = None, member: discord.Member = None):
         if member is None:
             member = ctx.prefix
         if style is None:
