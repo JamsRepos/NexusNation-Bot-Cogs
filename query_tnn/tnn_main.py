@@ -149,7 +149,8 @@ async def surfStats(ctx, stats, member):
         colour=0xff0000
     )
     embed.set_author(
-        name=f"{member} Surf Stats"
+        name=f"{member} Surf Stats",
+        icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
     )
     embed.set_thumbnail(
         url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
