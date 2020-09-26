@@ -150,7 +150,7 @@ async def surfbhopStats(ctx, stats, member):
         colour=0xff0000
     )
     embed.set_author(
-        name=f"{member} {styles[style]} Surf Stats",
+        name=f"{member} {styles[style]} Stats",
         icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
     )
     embed.add_field(
