@@ -163,7 +163,8 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="First Joined",
-        value=joined
+        value=joined,
+        inline=False
     )
     embed.add_field(
         name="Last Online",
@@ -171,7 +172,8 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="Records",
-        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
+        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}",
+        inline=False
     )
     embed.add_field(
         name="Completed",
