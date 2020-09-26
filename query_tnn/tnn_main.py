@@ -123,18 +123,18 @@ async def tttStats(ctx, stats, member):
 async def surfStats(ctx, stats, member):
     points = stats[0]
     wrpoints = stats[1]
-    top10points = stats[3]
-    finishedmapspro = stats[4]
-    finishedbonuses = stats[5]
-    finishedstages = stats[6]
-    wrs = stats[7]
-    wrbs = stats[8]
-    wrcps = stats[9]
-    top10s = stats[10]
-    lastseen = datetime.datetime.fromtimestamp(int(stats[11])).strftime('%d-%m-%Y @ %H:%M:%S')
-    joined = datetime.datetime.fromtimestamp(int(stats[12])).strftime('%d-%m-%Y @ %H:%M:%S')
-    timealive = stats[13]
-    connections = stats[14]
+    top10points = stats[2]
+    finishedmapspro = stats[3]
+    finishedbonuses = stats[4]
+    finishedstages = stats[5]
+    wrs = stats[6]
+    wrbs = stats[7]
+    wrcps = stats[8]
+    top10s = stats[9]
+    lastseen = datetime.datetime.fromtimestamp(int(stats[10])).strftime('%d-%m-%Y @ %H:%M:%S')
+    joined = datetime.datetime.fromtimestamp(int(stats[11])).strftime('%d-%m-%Y @ %H:%M:%S')
+    timealive = stats[12]
+    connections = stats[13]
 
     if wrpoints > 0:
         top10string = f"{top10s} - [{top10points}+{wrpoints}]"
