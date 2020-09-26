@@ -153,11 +153,11 @@ async def surfStats(ctx, stats, member):
         icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
     )
     embed.add_field(
-        name="Points",
+        name="Total Points",
         value=stats[0]
     )
     embed.add_field(
-        name="Top 10",
+        name="Top 10 Records",
         value=top10string
     )
     embed.add_field(
