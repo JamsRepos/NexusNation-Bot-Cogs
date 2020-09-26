@@ -137,7 +137,7 @@ async def surfStats(ctx, stats, member):
     wrcps = stats[13]
     top10s = stats[14]
     groups = stats[15]
-    lastseen = stats[16]
+    lastseen = datetime.datetime.fromtimestamp(int(stats[16])).strftime('%d-%m-%Y @ %H:%M:%S')
 
     if wrpoints > 0:
         top10string = f"{top10s} - [{top10points}+{wrpoints}]"
@@ -152,9 +152,6 @@ async def surfStats(ctx, stats, member):
         name=f"{member} Surf Stats",
         icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
     )
-    embed.set_thumbnail(
-        url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
-    )
     embed.add_field(
         name="Total Points",
         value=stats[0],
@@ -163,6 +160,11 @@ async def surfStats(ctx, stats, member):
     embed.add_field(
         name="Top 10 Records",
         value=top10string,
+        inline=False
+    )
+    embed.add_field(
+        name="Last Online",
+        value=lastseen,
         inline=False
     )
     embed.add_field(
