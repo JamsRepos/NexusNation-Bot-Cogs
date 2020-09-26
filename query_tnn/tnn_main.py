@@ -303,7 +303,7 @@ class QueryTNN(commands.Cog):
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
                     community_id = result[0]
-                    cursor.execute(f"SELECT points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, groups FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
+                    cursor.execute(f"SELECT points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, groups, lastseen FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await surfStats(ctx, result, member)
                 except Exception as e:
