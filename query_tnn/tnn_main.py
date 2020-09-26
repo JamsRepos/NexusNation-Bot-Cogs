@@ -300,9 +300,9 @@ class QueryTNN(commands.Cog):
             pass
     
     @surf_commands.command()
-    async def stats(self, ctx, style = None, member: discord.Member = None):
+    async def stats(self, style = None, member: discord.Member = None):
         if member is None:
-            member = ctx.author
+            member = ctx.prefix
         if style is None:
             prefix = ctx.prefix
             await ctx.send(f"> No style specified, please use ``n``, ``sw``, ``hsw``, ``bw``, ``lg``, ``sm``, ``ff``, ``fs``.\n> Example: ``{prefix}surf stats hsw``.")
