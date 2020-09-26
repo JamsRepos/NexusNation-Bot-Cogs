@@ -294,7 +294,7 @@ class QueryTNN(commands.Cog):
         except Error as e:
             print("Error while connecting to MySQL", e)
 
-    @commands.group(name="surf")
+    @commands.group(name="surf", pass_context=True)
     async def surf_commands(self, ctx):
         if ctx.invoked_subcommand is None:
             pass
