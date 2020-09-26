@@ -149,8 +149,10 @@ async def surfStats(ctx, stats, member):
         colour=0xff0000
     )
     embed.set_author(
-        name=f"{member} Surf Stats",
-        icon_url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
+        name=f"{member} Surf Stats"
+    )
+    embed.set_thumbnail(
+        url="https://cdn.discordapp.com/icons/269912749327253504/08d4ddc1e97d0314de83196806bb1f9c.webp?size=128"
     )
     embed.add_field(
         name="Total Points",
@@ -164,13 +166,11 @@ async def surfStats(ctx, stats, member):
     )
     embed.add_field(
         name="Records",
-        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}",
-        inline=False
+        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
     )
     embed.add_field(
         name="Completed",
-        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}",
-        inline=False
+        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}"
     )
     await ctx.send(embed=embed)
 
