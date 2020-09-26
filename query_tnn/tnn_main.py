@@ -249,19 +249,19 @@ class QueryTNN(commands.Cog):
             prefix = ctx.prefix
             await ctx.send(f"> No style specified, please use ``n``, ``sw``, ``hsw``, ``bw``, ``lg``, ``ff``, ``fs``.\n> Example: ``{prefix}surf stats hsw``.")
             return
-        if style is "n":
+        if style == "n":
             styleint = 0
-        if style is "sw":
+        if style == "sw":
             styleint = 1
-        if style is "hsw":
+        if style == "hsw":
             styleint = 2
-        if style is "bw":
+        if style == "bw":
             styleint = 3
-        if style is "lg":
+        if style == "lg":
             styleint = 4
-        if style is "ff":
+        if style == "ff":
             styleint = 5
-        if style is "fs":
+        if style == "fs":
             styleint = 6
         try:
             connection = mysql.connector.connect(
