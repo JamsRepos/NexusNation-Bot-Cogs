@@ -164,18 +164,6 @@ async def surfStats(ctx, stats, member):
         value=country
     )
     embed.add_field(
-        name="Records",
-        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
-    )
-    embed.add_field(
-        name="Completed",
-        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}"
-    )
-    embed.add_field(
-        name="Total Connections",
-        value=connections
-    )
-    embed.add_field(
         name="First Joined",
         value=joined
     )
@@ -186,6 +174,18 @@ async def surfStats(ctx, stats, member):
     embed.add_field(
         name="Time Played",
         value=timealive
+    )
+    embed.add_field(
+        name="Records",
+        value=f"Map WR: {wrs}\nStage WR: {wrcps}\nBonus WR: {wrbs}"
+    )
+    embed.add_field(
+        name="Completed",
+        value=f"Maps: {finishedmapspro}\nStages: {finishedstages}\nBonuses: {finishedbonuses}"
+    )
+    embed.add_field(
+        name="Total Connections",
+        value=connections
     )
     await ctx.send(embed=embed)
 
