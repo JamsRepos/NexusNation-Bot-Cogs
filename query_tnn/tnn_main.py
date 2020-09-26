@@ -260,6 +260,7 @@ class QueryTNN(commands.Cog):
                     community_id = communityid_converter(result[0])
                     if style is "normal":
                         styleint = 0
+                    await ctx.send(styleint)
                     cursor.execute(f"SELECT country, points, wrpoints, wrbpoints, wrcppoints, top10points, groupspoints, mappoints, bonuspoints, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, `groups`, lastseen FROM ck_playerrank WHERE steamid64 = '{communityid}' AND style = '{styleint}';")
                     result = cursor.fetchone()
                     await surfStats(ctx, result, member)
