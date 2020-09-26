@@ -305,7 +305,7 @@ class QueryTNN(commands.Cog):
             member = ctx.author
         if style is None:
             prefix = ctx.prefix
-            await ctx.send(f"> No style specified, please use ``n``, ``sw``, ``hsw``, ``bw``, ``lg``, ``ff``, ``fs``.\n> Example: ``{prefix}surf stats hsw``.")
+            await ctx.send(f"> No style specified, please use ``n``, ``sw``, ``hsw``, ``bw``, ``lg``, ``sm``, ``ff``, ``fs``.\n> Example: ``{prefix}surf stats hsw``.")
             return
         if style == "n":
             styleint = 0
@@ -317,10 +317,12 @@ class QueryTNN(commands.Cog):
             styleint = 3
         if style == "lg":
             styleint = 4
-        if style == "ff":
+        if style == "sm":
             styleint = 5
-        if style == "fs":
+        if style == "ff":
             styleint = 6
+        if style == "fs":
+            styleint = 7
         try:
             connection = mysql.connector.connect(
                 host='localhost',
