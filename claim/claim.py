@@ -53,6 +53,9 @@ class Claim(commands.Cog):
         self.nitro_boosters_channel_id = 664889221579931658 # Nitro Boosts Channel ID
         self.claimReminder.start()
 
+    def cog_unload(self):
+        self.claimReminder.cancel()
+
     @commands.group()
     @checks.admin()
     async def claimset(self, ctx):
