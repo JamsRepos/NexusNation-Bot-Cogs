@@ -76,7 +76,7 @@ class HelpMenu(commands.Cog):
         generalcommands = """`ping` `avatar` `snapchat` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
         moderationcommands = """`prune` `cleanup` `ban` `hackban` `ignore` `kick` `modset` `mute` `names` `rename` `slowmode` `softban` `tempban` `unban` `unignore` `unmute` `modlogsetup` `modlogset` `case` `casefor` `reason`"""
         musiccommands = """`audioset` `audiostats` `bump` `disconnect` `summon` `local` `np` `pause` `percent` `play` `playlist` `prev` `queue` `remove` `repeat` `search` `seek` `shuffle` `skip` `stop` `volume` `lyrics`"""
-        nexuscommands = """`jb` `ttt`"""
+        nexuscommands = """`jb` `ttt` `surf` `bhop`"""
         utilitycommands = """`starboard` `customcom`  `filter` `filterset` `autorole` `alias` `google` `away` `toggleaway` `gif` `imgtfy` `imgur` `covid` `color` `autoroom` `autoroomset`"""
         page2 = discord.Embed(colour=(await ctx.embed_colour()))
         page2.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
