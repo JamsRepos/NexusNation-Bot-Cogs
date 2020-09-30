@@ -19,6 +19,7 @@ async def get_channels(client):
         print(e)
 
 async def get_streams(client):
+    # grabs streams connected
     connections = len(lavalink.all_players())
     if connections == 0:
         connections = "0"
