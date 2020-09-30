@@ -46,6 +46,6 @@ class StatsMain(commands.Cog):
         commands = len(self.bot.commands)
         channels = await get_channels(self.bot)
         streams = await get_streams(self.bot)
-        connect('cicada_discordbot', f"UPDATE `bot_stats` SET `servers` = {guilds}, `users` = {users}, `channels` = {channels}, `commands` ={commands}, `streams` = {streams} WHERE ID = 1")
+        connect('nexusbot', f"UPDATE `bot_stats` SET `servers` = {guilds}, `users` = {users}, `channels` = {channels}, `commands` ={commands}, `streams` = {streams} WHERE ID = 1")
 
         
