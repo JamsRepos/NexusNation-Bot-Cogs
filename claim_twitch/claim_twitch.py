@@ -8,36 +8,23 @@ from redbot.core import commands
 from redbot.core import checks, Config
 from discord.ext import tasks
 
-def ifconfig():
-    async def predicate(ctx):
-        cog = ctx.cog
-        url = await cog.config.guild(ctx.guild).url()
-        api_key = await cog.config.guild(ctx.guild).api_key()
-        if not (url and api_key):
-            raise commands.UserFeedbackCheckFailure(message="You need to setup Prometheus server url and api key first!")
-        else:
-            return True
-    return commands.check(predicate)
-
-def is_booster():
+def is_sub():
     async def predicate(ctx):
         rolename = await ctx.cog.config.guild(ctx.guild).role_name()
         for x in ctx.author.roles:
             if x.name == rolename:
                 return True
-        raise commands.UserFeedbackCheckFailure(message="You are not currently boosting our server. Please click the **Server Name** at the top of our Discord and click **Server Boost** for more information.\nIf you are already boosting another server, go to your **User Settings** then find **Server Boost** on the left-hand side and then click the three dots to **Transfer Boost**.")
+        raise commands.UserFeedbackCheckFailure(message="You are not currently subscribed to <https://twitch.tv/LubricantJam>. Please click the link and find the **Subscribe Free** button. \nIf you do not see this, you do not have **Twitch Prime** linked to your account. You can link by following this link <https://gaming.amazon.com/>.")
     return commands.check(predicate)
 
-class Claim(commands.Cog):
+class Claim_Twitch(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=8797456312)
         default_guild = {
-            "url": "",
-            "api_key": "",
-            "amount": 150,
-            "couldown": 7, ##cooldown is in days, cuz it's easier
-            "role_name": "Nitro Booster"
+            "package": 0,
+            "couldown": 31, ##cooldown is in days, cuz it's easier
+            "role_name": "Twitch Subscriber"
         }
         default_member = {
             "last_claim": 0,
@@ -48,9 +35,9 @@ class Claim(commands.Cog):
         self.config.register_member(**default_member)
         self.time_then = 0
         self.bot_commands_channel_id = 269933786853015553 # Bot commands channel ID
-        self.role_id = 585551637855076364
+        self.role_id = 761683196365766686
         self.guild_id = 269912749327253504 # Guild ID
-        self.nitro_boosters_channel_id = 664889221579931658 # Nitro Boosts Channel ID
+        self.twitch_channel_id = 664889221579931658 # New Sub Channel ID
         self.claimReminder.start()
 
     def cog_unload(self):
@@ -85,43 +72,34 @@ class Claim(commands.Cog):
 
     @claimset.command()
     @checks.admin()
-    async def amount(self, ctx, amount:int=150):
-        """Set the amount of credits users get for a single claim.
-        Defaults to 150"""
-        await self.config.guild(ctx.guild).amount.set(amount)
-        await ctx.send(f"Successfully saved {amount} credits to be given on claim.")
+    async def package(self, ctx, package:int=0):
+        """Set the package ID for the package redeemed.
+        Defaults to 0"""
+        await self.config.guild(ctx.guild).package.set(package)
+        await ctx.send(f"Successfully saved {package} package to be given on claim.")
 
     @claimset.command()
     @checks.admin()
-    async def cooldown(self, ctx, cooldown:int=7):
+    async def cooldown(self, ctx, cooldown:int=31):
         """Set the cooldown between 2 claims (in days).
-        Defaults to 7 days."""
+        Defaults to 31 days."""
         await self.config.guild(ctx.guild).cooldown.set(cooldown)
         await ctx.send(f"Successfully set claim cooldown to {cooldown} days.")
 
     @claimset.command()
     @checks.admin()
     async def role(self, ctx, role : discord.Role):
-        """If you changed Nitro Booster role's name, and everything's broken, use this command tagging the role to fix everything."""
+        """If you changed Twitch Subscriber role's name, and everything's broken, use this command tagging the role to fix everything."""
         await self.config.guild(ctx.guild).role_name(role.name)
         await ctx.send("Successfully saved the role.")
 
+    @is_sub()
     @commands.command()
-    async def linksteam(self, ctx, userid):
-        """Set your **User ID** for claiming your tokens.
-        This can be found on your profile on our store.
-        **Visit your Profile:** https://nexushub.io/profile.php"""
-        await self.config.member(ctx.author).steamid.set(userid)
-        await ctx.send(f"You have chosen the **User ID** of **{userid}**. Please ensure this is the correct **User ID** on your Donation Store Profile.")
-
-    @ifconfig()
-    @is_booster()
-    @commands.command()
-    async def claim(self, ctx):
-        """Claim your monthly tokens as a Nitro Booster."""
+    async def claim_twitch(self, ctx):
+        """Claim your monthly tokens as a Twitch Subscriber."""
         url = await self.config.guild(ctx.guild).url()
         apikey = await self.config.guild(ctx.guild).api_key()
-        amount = await self.config.guild(ctx.guild).amount()
+        package = await self.config.guild(ctx.guild).package()
         cooldown = await self.config.guild(ctx.guild).cooldown()
         lastclaim = await self.config.member(ctx.author).last_claim()
         steamid = await self.config.member(ctx.author).steamid()
@@ -131,8 +109,8 @@ class Claim(commands.Cog):
         if (now - lastclaimdt).days < int(cooldown):
             return await ctx.send(f"You have already claimed recently. You have **{nextclaim}** days left until you can claim again.")
         if steamid == 0:
-            return await ctx.send(f"In order to claim **{amount}** tokens, please use **!linksteam** and ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
-        req = f"?hash={apikey}&steamid={steamid}&action=addCredits&amount={amount}"
+            return await ctx.send(f"In order to claim **VIP**, please use **!linksteam** and ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
+        req = f"?hash={apikey}&steamid={steamid}&action=assignPackage&package={package}"
         async with aiohttp.ClientSession() as session:
             async with session.get(url + req) as resp:
                 json = await resp.json()
@@ -141,22 +119,22 @@ class Claim(commands.Cog):
                 elif json["error"]:
                     return await ctx.send(f"An error occured:\n{json['error']}")
                 else:
-                    await ctx.send(f"You have successfully redeemed **{amount}** tokens. Thank you for supporting our servers.")
+                    await ctx.send(f"You have successfully redeemed **VIP**. Thank you for supporting our servers.")
                     await self.config.member(ctx.author).last_claim.set(int(time.time()))
 
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
-        booster_role = before.guild.get_role(self.role_id)
-        if booster_role != None:
-            current_booster = booster_role in before.roles
+        twitch_role = before.guild.get_role(self.role_id)
+        if twitch_role != None:
+            current_twitch = twitch_role in before.roles
         else:
-            current_booster = False
+            current_twitch = False
 
-        if booster_role in after.roles and not current_booster:
-            channel_obj = self.bot.get_channel(self.nitro_boosters_channel_id)
+        if twitch_role in after.roles and not current_twitch:
+            channel_obj = self.bot.get_channel(self.twitch_channel_id)
             if channel_obj != None:
-                await channel_obj.send("Thanks for boosting {}, you can now obtain free tokens on our Donation Store by typing ``!claim`` in <#269933786853015553>.\nIf you would like to be notified when you can claim again, please use ``!remindme`` in <#269933786853015553>.".format(after.mention))
+                await channel_obj.send("Thanks for subscribing to <https://twitch.tv/LubricantJam/> {}, you can now obtain free VIP by typing ``!claim`` in <#269933786853015553>.\nIf you would like to be notified when you can claim again, please use ``!remindme`` in <#269933786853015553>.".format(after.mention))
 
     @tasks.loop(minutes=15)
     async def claimReminder(self):
@@ -176,7 +154,7 @@ class Claim(commands.Cog):
                         has_role = False
                 if (has_role == True) and (lastclaim <= (timenow-604800)) and (await self.config.member(self.bot.get_guild(self.guild_id).get_member(member.id)).remind() == True):
                     discord_member_id = '<@!'+str(member.id)+'>'
-                    await channel.send(discord_member_id + ", You can now claim your weekly tokens, type `!claim` in <#269933786853015553>. This reminder will stop once you claim your reward or use ``!remindme`` to toggle this alert.") 
+                    await channel.send(discord_member_id + ", You can now claim free VIP, type `!claim` in <#269933786853015553>. This reminder will stop once you claim your reward or use ``!remindme`` to toggle this alert.") 
                     has_role = False
                 else:
                     pass
@@ -207,11 +185,11 @@ class Claim(commands.Cog):
 
 
     @commands.command()
-    @is_booster()
+    @is_sub()
     async def remindme(self, ctx):
         if await self.config.member(ctx.author).remind():
             await self.config.member(ctx.author).remind.set(False)
-            await ctx.send(f"{ctx.author.mention} You will **no longer** be notified when you can use ``!claim`` again.")
+            #await ctx.send(f"{ctx.author.mention} You will **no longer** be notified when you can use ``!claim`` again.")
         elif not await self.config.member(ctx.author).remind():
             await self.config.member(ctx.author).remind.set(True)
-            await ctx.send(f"{ctx.author.mention} You will **now** be notified when you can use ``!claim`` again.")
+            #await ctx.send(f"{ctx.author.mention} You will **now** be notified when you can use ``!claim`` again.")
