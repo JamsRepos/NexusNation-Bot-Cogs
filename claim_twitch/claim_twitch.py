@@ -186,7 +186,7 @@ class Claim_Twitch(commands.Cog):
 
     @commands.command()
     @is_sub()
-    async def remindme(self, ctx):
+    async def remindme_twitch(self, ctx):
         if await self.config.member(ctx.author).remind():
             await self.config.member(ctx.author).remind.set(False)
             #await ctx.send(f"{ctx.author.mention} You will **no longer** be notified when you can use ``!claim`` again.")
