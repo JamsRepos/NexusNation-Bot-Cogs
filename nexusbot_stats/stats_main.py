@@ -18,18 +18,9 @@ async def get_channels(client):
     except Exception as e:
         print(e)
 
-async def get_streams(client):
-    # grabs streams connected
-    connections = len(lavalink.all_players())
-    if connections == 0:
-        connections = "0"
-    else:
-        connections = len(lavalink.all_players())
-        return connections
-
 class StatsMain(commands.Cog):
 
-    __author__ = "Raff"
+    __author__ = "Created by Raff, fucked by Bramble"
     __version__ = "1.0.0"
 
     def __init__(self, bot):
@@ -39,13 +30,16 @@ class StatsMain(commands.Cog):
     def cog_unload(self):
         self.update_db.cancel()
     
-    @discord.ext.tasks.loop(minutes=5.0)
+    @discord.ext.tasks.loop(minutes=1.0)
     async def update_db(self):
+        # this has to be nested in here or has issues grabbing self from Red.
+        if self.bot.get_cog("Audio") == None:
+            connections = 0
+        else:
+            connections = len(lavalink.all_players())
+
         guilds = len(self.bot.guilds)
         users = len(self.bot.users)
         commands = len(self.bot.commands)
         channels = await get_channels(self.bot)
-        streams = await get_streams(self.bot)
-        connect('nexusbot', f"UPDATE `bot_stats` SET `servers` = {guilds}, `users` = {users}, `channels` = {channels}, `commands` ={commands}, `streams` = {streams} WHERE ID = 1")
-
-        
+        connect('nexusbot', f"UPDATE `bot_stats` SET `servers` = {guilds}, `users` = {users}, `channels` = {channels}, `commands` = {commands}, `streams` = {connections} WHERE ID = 1")
