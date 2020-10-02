@@ -45,11 +45,11 @@ class Claim_Twitch(commands.Cog):
 
     @commands.group()
     @checks.admin()
-    async def claimset(self, ctx):
+    async def claimset_twitch(self, ctx):
         """Main group for setting up the cog."""
         pass
 
-    @claimset.command()
+    @claimset_twitch.command()
     @checks.admin()
     async def url(self, ctx, url):
         """Set the url of your Prometheus server.
@@ -57,7 +57,7 @@ class Claim_Twitch(commands.Cog):
         await self.config.guild(ctx.guild).url.set(url)
         await ctx.send(f"Prometheus url set to {url}")
 
-    @claimset.command()
+    @claimset_twitch.command()
     @checks.admin()
     async def apikey(self, ctx, apikey):
         """Set the api key for the Prometheus server.
@@ -70,7 +70,7 @@ class Claim_Twitch(commands.Cog):
         await self.config.guild(ctx.guild).api_key.set(apikey)
         await ctx.send("Successfully saved the api key.")
 
-    @claimset.command()
+    @claimset_twitch.command()
     @checks.admin()
     async def package(self, ctx, package:int=0):
         """Set the package ID for the package redeemed.
@@ -78,7 +78,7 @@ class Claim_Twitch(commands.Cog):
         await self.config.guild(ctx.guild).package.set(package)
         await ctx.send(f"Successfully saved {package} package to be given on claim.")
 
-    @claimset.command()
+    @claimset_twitch.command()
     @checks.admin()
     async def cooldown(self, ctx, cooldown:int=31):
         """Set the cooldown between 2 claims (in days).
@@ -86,7 +86,7 @@ class Claim_Twitch(commands.Cog):
         await self.config.guild(ctx.guild).cooldown.set(cooldown)
         await ctx.send(f"Successfully set claim cooldown to {cooldown} days.")
 
-    @claimset.command()
+    @claimset_twitch.command()
     @checks.admin()
     async def role(self, ctx, role : discord.Role):
         """If you changed Twitch Subscriber role's name, and everything's broken, use this command tagging the role to fix everything."""
