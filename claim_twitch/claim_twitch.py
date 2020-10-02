@@ -93,6 +93,14 @@ class Claim_Twitch(commands.Cog):
         await self.config.guild(ctx.guild).role_name(role.name)
         await ctx.send("Successfully saved the role.")
 
+    @commands.command()
+    async def linksteam_twitch(self, ctx, userid):
+        """Set your **User ID** for claiming your tokens.
+        This can be found on your profile on our store.
+        **Visit your Profile:** https://nexushub.io/profile.php"""
+        await self.config.member(ctx.author).steamid.set(userid)
+        await ctx.send(f"You have chosen the **User ID** of **{userid}**. Please ensure this is the correct **User ID** on your Donation Store Profile.")
+
     @is_sub()
     @commands.command()
     async def claim_twitch(self, ctx):
