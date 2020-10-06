@@ -29,3 +29,4 @@ def read(db, query):
             return result
     except Error as e:
         print("Error while connecting to MySQL", e)
+        return False
