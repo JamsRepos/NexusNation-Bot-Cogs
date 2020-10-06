@@ -8,7 +8,7 @@ from redbot.core import commands
 from redbot.core import checks, Config
 from discord.ext import tasks
 
-import .sql_connect as SQL
+import sql_connect as SQL
 
 def communityid_converter(communityid):
     steamid64ident = 76561197960265728
