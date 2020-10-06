@@ -8,7 +8,7 @@ from redbot.core import commands
 from redbot.core import checks, Config
 from discord.ext import tasks
 
-import sql_connect as SQL
+from .sql_connect import read, write
 
 def communityid_converter(communityid):
     steamid64ident = 76561197960265728
@@ -120,7 +120,7 @@ class Claim(commands.Cog):
         This can be found on your profile on our store.
         **Visit your Profile:** https://nexushub.io/profile.php"""
 
-        userid = SQL.read('discord_integration', f"SELECT `steamid` FROM `du_users` WHERE `userid` = {ctx.author.id}")
+        userid = read('discord_integration', f"SELECT `steamid` FROM `du_users` WHERE `userid` = {ctx.author.id}")
         await ctx.send(userid)
 
         #await self.config.member(ctx.author).steamid.set()
