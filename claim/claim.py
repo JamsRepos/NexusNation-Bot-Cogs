@@ -120,7 +120,7 @@ class Claim(commands.Cog):
         This can be found on your profile on our store.
         **Visit your Profile:** https://nexushub.io/profile.php"""
 
-        userid = communityid_converter(int(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}")))
+        userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
 
         await ctx.send(userid)
 
