@@ -8,6 +8,17 @@ from redbot.core import commands
 from redbot.core import checks, Config
 from discord.ext import tasks
 
+from .sql_connect import read, write
+
+def communityid_converter(communityid):
+    steamid64ident = 76561197960265728
+    sid_split = communityid.split(':')
+    commid = int(sid_split[2]) * 2
+    if sid_split[1] == '1':
+        commid += 1
+    commid += steamid64ident
+    return commid
+
 def ifconfig():
     async def predicate(ctx):
         cog = ctx.cog
@@ -107,12 +118,16 @@ class Claim(commands.Cog):
         await ctx.send("Successfully saved the role.")
 
     @commands.command()
-    async def linksteam(self, ctx, userid):
+    async def linksteam(self, ctx):
         """Set your **User ID** for claiming your tokens.
         This can be found on your profile on our store.
         **Visit your Profile:** https://nexushub.io/profile.php"""
+
+        userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
+
         await self.config.member(ctx.author).steamid.set(userid)
-        await ctx.send(f"You have chosen the **User ID** of **{userid}**. Please ensure this is the correct **User ID** on your Donation Store Profile.")
+
+        await ctx.send(f"Your discord is now linked to the **User ID** `{userid}`. Please ensure this is the correct **User ID** on your Donation Store Profile.")
 
     @ifconfig()
     @is_booster()
