@@ -122,12 +122,9 @@ class Claim(commands.Cog):
 
         userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
 
-        await ctx.send(userid)
+        await self.config.member(ctx.author).steamid.set(userid)
 
-        #await self.config.member(ctx.author).steamid.set()
-
-
-        #await ctx.send(f"You have chosen the **User ID** of **{userid}**. Please ensure this is the correct **User ID** on your Donation Store Profile.")
+        await ctx.send(f"Your discord is now linked to the **User ID** `{userid}`. Please ensure this is the correct **User ID** on your Donation Store Profile.")
 
     @ifconfig()
     @is_booster()
