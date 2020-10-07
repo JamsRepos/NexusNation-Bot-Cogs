@@ -114,23 +114,14 @@ class Claim(commands.Cog):
         await self.config.guild(ctx.guild).role_name(role.name)
         await ctx.send("Successfully saved the role.")
 
-    @commands.command()
-    async def linksteam(self, ctx):
-        """Set your **User ID** for claiming your tokens.
-        This can be found on your profile on our store.
-        **Visit your Profile:** https://nexushub.io/profile.php"""
-
-        userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
-
-        await self.config.member(ctx.author).steamid.set(userid)
-
-        await ctx.send(f"Your discord is now linked to the **User ID** `{userid}`. Please ensure this is the correct **User ID** on your Donation Store Profile.")
-
     @ifconfig()
     @is_booster()
     @commands.command()
     async def claim(self, ctx):
         """Claim your monthly tokens as a Nitro Booster."""
+        userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
+        await self.config.member(ctx.author).steamid.set(userid)
+
         url = await self.config.guild(ctx.guild).url()
         apikey = await self.config.guild(ctx.guild).api_key()
         amount = await self.config.guild(ctx.guild).amount()
