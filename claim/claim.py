@@ -142,7 +142,7 @@ class Claim(commands.Cog):
         async with aiohttp.ClientSession() as session:
             async with session.get(url + req) as resp:
                 json = await resp.json()
-                if "STEAM_" in steamid:
+                if not str(steamid).isdigit():
                     await ctx.send(f"You have attempted to use **{steamid}** as your **User ID**. Please change this before attempting again.")
                 elif json["error"]:
                     return await ctx.send(f"An error occured:\n{json['error']}")
