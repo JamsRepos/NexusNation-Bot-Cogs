@@ -122,6 +122,7 @@ class Claim_Twitch(commands.Cog):
         """Claim your monthly tokens as a Twitch Subscriber."""
         userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
         await self.config.member(ctx.author).steamid.set(userid)
+        
         url = await self.config.guild(ctx.guild).url()
         apikey = await self.config.guild(ctx.guild).api_key()
         package = await self.config.guild(ctx.guild).package()
