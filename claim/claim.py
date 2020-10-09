@@ -125,8 +125,7 @@ class Claim(commands.Cog):
         userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
         await self.config.member(ctx.author).steamid.set(userid)
 
-        store = read('store', f"SELECT id FROM `players` WHERE uid = {userid}")
-        await ctx.send(f"lol it is equals to: {store} for {userid}")
+        store = read('store', f"SELECT id FROM `players` WHERE uid = {str(userid)}")
         if store == None:
             return await ctx.send(f"In order to claim **tokens**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
 
