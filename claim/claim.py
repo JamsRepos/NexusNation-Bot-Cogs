@@ -120,7 +120,7 @@ class Claim(commands.Cog):
     @ifconfig()
     @is_booster()
     @commands.command()
-    async def claim(self, ctx):
+    async def claimtokens(self, ctx):
         """Claim your monthly tokens as a Nitro Booster."""
         userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
         await self.config.member(ctx.author).steamid.set(userid)
@@ -162,7 +162,7 @@ class Claim(commands.Cog):
         if booster_role in after.roles and not current_booster:
             channel_obj = self.bot.get_channel(self.nitro_boosters_channel_id)
             if channel_obj != None:
-                await channel_obj.send("Thanks for boosting {}, you can now obtain free tokens on our Donation Store by typing ``!claim`` in <#269933786853015553>.\nIf you would like to be notified when you can claim again, please use ``!remindme`` in <#269933786853015553>.".format(after.mention))
+                await channel_obj.send("Thanks for boosting {}, you can now obtain free tokens on our Donation Store by typing ``!claimtokens`` in <#269933786853015553>.\nIf you would like to be notified when you can claim again, please use ``!tokenreminder`` in <#269933786853015553>.".format(after.mention))
 
     @tasks.loop(minutes=15)
     async def claimReminder(self):
@@ -182,7 +182,7 @@ class Claim(commands.Cog):
                         has_role = False
                 if (has_role == True) and (lastclaim <= (timenow-604800)) and (await self.config.member(self.bot.get_guild(self.guild_id).get_member(member.id)).remind() == True):
                     discord_member_id = '<@!'+str(member.id)+'>'
-                    await channel.send(discord_member_id + ", You can now claim your weekly tokens, type `!claim` in <#269933786853015553>. This reminder will stop once you claim your reward or use ``!remindme`` to toggle this alert.") 
+                    await channel.send(discord_member_id + ", You can now claim your weekly tokens, type `!claimtokens` in <#269933786853015553>. This reminder will stop once you claim your reward or use ``!tokenreminder`` to toggle this alert.") 
                     has_role = False
                 else:
                     pass
@@ -214,10 +214,10 @@ class Claim(commands.Cog):
 
     @commands.command()
     @is_booster()
-    async def remindme(self, ctx):
+    async def tokenreminder(self, ctx):
         if await self.config.member(ctx.author).remind():
             await self.config.member(ctx.author).remind.set(False)
-            await ctx.send(f"{ctx.author.mention} You will **no longer** be notified when you can use ``!claim`` again.")
+            await ctx.send(f"{ctx.author.mention} You will **no longer** be notified when you can use ``!claimtokens`` again.")
         elif not await self.config.member(ctx.author).remind():
             await self.config.member(ctx.author).remind.set(True)
-            await ctx.send(f"{ctx.author.mention} You will **now** be notified when you can use ``!claim`` again.")
+            await ctx.send(f"{ctx.author.mention} You will **now** be notified when you can use ``!claimtokens`` again.")
