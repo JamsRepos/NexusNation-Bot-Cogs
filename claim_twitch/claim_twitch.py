@@ -120,10 +120,10 @@ class Claim_Twitch(commands.Cog):
     @commands.command()
     async def claimvip(self, ctx):
         """Claim your monthly tokens as a Twitch Subscriber."""
-        userid = communityid_converter(read('discord_integration', f"SELECT IFNULL( SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)} , 0);"))
+        userid = communityid_converter(read('discord_integration', f"SELECT IFNULL( (SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}) , 0);"))
         await self.config.member(ctx.author).steamid.set(userid)
 
-        store = read('store', f"SELECT IFNULL( (SELECT id FROM `players` WHERE uid = {userid} , 0);")
+        store = read('store', f"SELECT IFNULL( (SELECT id FROM `players` WHERE uid = {userid}) , 0);")
         if store == 0:
             return await ctx.send(f"In order to claim **VIP**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
         
