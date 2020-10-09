@@ -26,9 +26,6 @@ def read(db, query):
             cursor = connection.cursor()
             cursor.execute(query)
             result = cursor.fetchone()
-            if result[0] != None:
-                return result[0]
-            else:
-                return 0
+            return result[0]
     except Error as e:
         print("Error while connecting to MySQL", e)
