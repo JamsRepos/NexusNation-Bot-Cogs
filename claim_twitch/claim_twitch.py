@@ -8,7 +8,6 @@ from redbot.core import commands
 from redbot.core import checks, Config
 from discord.ext import tasks
 
-<<<<<<< HEAD
 from .sql_connect import read, write
 
 def communityid_converter(communityid):
@@ -31,8 +30,6 @@ def ifconfig():
             return True
     return commands.check(predicate)
 
-=======
->>>>>>> master
 def is_sub():
     async def predicate(ctx):
         rolename = await ctx.cog.config.guild(ctx.guild).role_name()
