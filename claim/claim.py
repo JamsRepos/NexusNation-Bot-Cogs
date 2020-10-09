@@ -122,11 +122,11 @@ class Claim(commands.Cog):
     @commands.command()
     async def claimtokens(self, ctx):
         """Claim your monthly tokens as a Nitro Booster."""
-        userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
+        userid = communityid_converter(read('discord_integration', f"SELECT IFNULL(steamid,0) FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
         await self.config.member(ctx.author).steamid.set(userid)
 
-        store = read('store', f"SELECT id FROM `players` WHERE uid = {userid}")
-        if store == None:
+        store = read('store', f"SELECT IFNULL(id,0) FROM `players` WHERE uid = {userid}")
+        if store == 0:
             return await ctx.send(f"In order to claim **tokens**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
 
         url = await self.config.guild(ctx.guild).url()
@@ -140,6 +140,8 @@ class Claim(commands.Cog):
         nextclaim = cooldown - (now - lastclaimdt).days
         if (now - lastclaimdt).days < int(cooldown):
             return await ctx.send(f"You have already claimed recently. You have **{nextclaim}** days left until you can claim again.")
+        if steamid == 0:
+            return await ctx.send(f"You have not linked your Steam account to perform this command.")
         req = f"?hash={apikey}&steamid={steamid}&action=addCredits&amount={amount}"
         async with aiohttp.ClientSession() as session:
             async with session.get(url + req) as resp:
