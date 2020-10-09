@@ -122,10 +122,10 @@ class Claim(commands.Cog):
     @commands.command()
     async def claimtokens(self, ctx):
         """Claim your monthly tokens as a Nitro Booster."""
-        userid = communityid_converter(read('discord_integration', f"SELECT IFNULL(steamid,0) FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
+        userid = communityid_converter(read('discord_integration', f"SELECT IFNULL( (SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}) , 0);"))
         await self.config.member(ctx.author).steamid.set(userid)
 
-        store = read('store', f"SELECT IFNULL(id,0) FROM `players` WHERE uid = {userid}")
+        store = read('store', f"SELECT IFNULL( (SELECT id FROM `players` WHERE uid = {userid}) , 0);")
         if store == 0:
             return await ctx.send(f"In order to claim **tokens**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
 
