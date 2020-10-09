@@ -120,8 +120,12 @@ class Claim_Twitch(commands.Cog):
     @commands.command()
     async def claimvip(self, ctx):
         """Claim your monthly tokens as a Twitch Subscriber."""
-        userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
+        userid = communityid_converter(read('discord_integration', f"SELECT IFNULL( (SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}) , 0);"))
         await self.config.member(ctx.author).steamid.set(userid)
+
+        store = read('store', f"SELECT IFNULL( (SELECT id FROM `players` WHERE uid = {userid}) , 0);")
+        if store == 0:
+            return await ctx.send(f"In order to claim **VIP**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
         
         url = await self.config.guild(ctx.guild).url()
         apikey = await self.config.guild(ctx.guild).api_key()
@@ -135,7 +139,7 @@ class Claim_Twitch(commands.Cog):
         if (now - lastclaimdt).days < int(cooldown):
             return await ctx.send(f"You have already claimed recently. You have **{nextclaim}** days left until you can claim again.")
         if steamid == 0:
-            return await ctx.send(f"In order to claim **VIP**, please use **!linksteam** and ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
+            return await ctx.send("You have not linked your Steam account to perform this command.")
         req = f"?hash={apikey}&steamid={steamid}&action=assignPackage&package={package}"
         async with aiohttp.ClientSession() as session:
             async with session.get(url + req) as resp:
