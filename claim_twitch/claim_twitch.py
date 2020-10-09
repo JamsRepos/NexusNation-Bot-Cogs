@@ -124,6 +124,7 @@ class Claim_Twitch(commands.Cog):
         await self.config.member(ctx.author).steamid.set(communityid_converter(userid))
 
         store = read('store', f"SELECT id FROM `players` WHERE uid = {userid}")
+        await ctx.send(store)
         if store == 0:
             return await ctx.send(f"In order to claim **VIP**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
         
