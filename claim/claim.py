@@ -127,7 +127,7 @@ class Claim(commands.Cog):
 
         store = read('store', f"SELECT id FROM `players` WHERE uid = {userid}")
         if store == 0:
-            return await ctx.send(f"In order to claim **VIP**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
+            return await ctx.send(f"In order to claim **tokens**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
 
         url = await self.config.guild(ctx.guild).url()
         apikey = await self.config.guild(ctx.guild).api_key()
