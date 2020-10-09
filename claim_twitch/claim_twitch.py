@@ -123,8 +123,8 @@ class Claim_Twitch(commands.Cog):
         userid = communityid_converter(read('discord_integration', f"SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}"))
         await self.config.member(ctx.author).steamid.set(userid)
 
-        store = read('store', f"SELECT id FROM `players` WHERE uid = {str(userid)}")
-        if store == None:
+        store = read('store', f"SELECT id FROM `players` WHERE uid = {userid}")
+        if store == 0:
             return await ctx.send(f"In order to claim **VIP**, please ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
         
         url = await self.config.guild(ctx.guild).url()
@@ -138,7 +138,7 @@ class Claim_Twitch(commands.Cog):
         nextclaim = cooldown - (now - lastclaimdt).days
         if (now - lastclaimdt).days < int(cooldown):
             return await ctx.send(f"You have already claimed recently. You have **{nextclaim}** days left until you can claim again.")
-        if steamid == None:
+        if steamid == 0:
             return await ctx.send(f"In order to claim **VIP**, please use **!linksteam** and ensure you have signed in at least **ONCE** to our Donation Store.\n**Visit our Store:** https://nexushub.io/")
         req = f"?hash={apikey}&steamid={steamid}&action=assignPackage&package={package}"
         async with aiohttp.ClientSession() as session:
