@@ -89,8 +89,8 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             "next": "\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE WITH VERTICAL BAR}\N{VARIATION SELECTOR-16}",
             "rewind": "\N{LEFTWARDS BLACK ARROW}\N{VARIATION SELECTOR-16}",
             "seek": "\N{BLACK RIGHTWARDS ARROW}\N{VARIATION SELECTOR-16}",
-            "shuffle": ":ShuffleButton:771416884016578610",
-            "repeat": ":RepeatButton:771416884109115412",
+            "shuffle": ":ShuffleButton:771418385842044949",
+            "repeat": ":RepeatButton:771418593715945472",
             "close": "\N{CROSS MARK}",
         }
         expected = tuple(emoji.values())
@@ -160,7 +160,7 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             expected = (emoji["stop"], emoji["pause"], emoji["rewind"], emoji["seek"], emoji["shuffle"], emoji["repeat"], emoji["close"])
         task: Optional[asyncio.Task]
         if player.current:
-            task = start_adding_reactions(message, expected[:8])
+            task = start_adding_reactions(message, expected)
         else:
             task = None
 
