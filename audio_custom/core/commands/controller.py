@@ -89,8 +89,8 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             "next": "\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE WITH VERTICAL BAR}\N{VARIATION SELECTOR-16}",
             "rewind": "\N{LEFTWARDS BLACK ARROW}\N{VARIATION SELECTOR-16}",
             "seek": "\N{BLACK RIGHTWARDS ARROW}\N{VARIATION SELECTOR-16}",
-            "shuffle": "ShuffleButton:771418385842044949",
-            "repeat": "RepeatButton:771418593715945472",
+            "shuffle": "🔀",
+            "repeat": "🔁",
             "close": "\N{CROSS MARK}",
         }
         expected = tuple(emoji.values())
