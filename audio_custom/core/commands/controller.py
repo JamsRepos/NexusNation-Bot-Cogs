@@ -158,7 +158,7 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             expected = (emoji["stop"], emoji["pause"], emoji["shuffle"], emoji["repeat"], emoji["close"])
         task: Optional[asyncio.Task]
         if player.current:
-            task = start_adding_reactions(message, expected[:7])
+            task = start_adding_reactions(message, expected)
         else:
             task = None
 
