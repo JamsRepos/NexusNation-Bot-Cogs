@@ -88,7 +88,7 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             "pause": "\N{BLACK RIGHT-POINTING TRIANGLE WITH DOUBLE VERTICAL BAR}\N{VARIATION SELECTOR-16}",
             "next": "\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE WITH VERTICAL BAR}\N{VARIATION SELECTOR-16}",
             "shuffle": "\N{TWISTED RIGHTWARDS ARROWS}\N{VARIATION SELECTOR-16}",
-            "repeat": "\N{CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS}\N{VARIATION SELECTOR-16}"
+            "repeat": "\N{CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS}\N{VARIATION SELECTOR-16}",
             "close": "\N{CROSS MARK}",
         }
         expected = tuple(emoji.values())
