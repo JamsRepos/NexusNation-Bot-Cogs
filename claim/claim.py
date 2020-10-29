@@ -69,7 +69,6 @@ class Claim(commands.Cog):
 
     @commands.group()
     @checks.admin()
-    @commands.hidden()
     async def claimset(self, ctx):
         """Main group for setting up the cog."""
         pass
