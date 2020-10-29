@@ -87,9 +87,8 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             "stop": "\N{BLACK SQUARE FOR STOP}\N{VARIATION SELECTOR-16}",
             "pause": "\N{BLACK RIGHT-POINTING TRIANGLE WITH DOUBLE VERTICAL BAR}\N{VARIATION SELECTOR-16}",
             "next": "\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE WITH VERTICAL BAR}\N{VARIATION SELECTOR-16}",
-            "rewind": "\N{LEFTWARDS BLACK ARROW}\N{VARIATION SELECTOR-16}",
-            "seek": "\N{BLACK RIGHTWARDS ARROW}\N{VARIATION SELECTOR-16}",
             "shuffle": "\N{TWISTED RIGHTWARDS ARROWS}\N{VARIATION SELECTOR-16}",
+            "repeat": "\N{CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS}\N{VARIATION SELECTOR-16}"
             "close": "\N{CROSS MARK}",
         }
         expected = tuple(emoji.values())
@@ -156,10 +155,10 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
             return
 
         if not player.queue and not autoplay:
-            expected = (emoji["stop"], emoji["pause"], emoji["rewind"], emoji["seek"], emoji["shuffle"], emoji["close"])
+            expected = (emoji["stop"], emoji["pause"], emoji["shuffle"], emoji["repeat"], emoji["close"])
         task: Optional[asyncio.Task]
         if player.current:
-            task = start_adding_reactions(message, expected[:8])
+            task = start_adding_reactions(message, expected[:7])
         else:
             task = None
 
@@ -188,15 +187,12 @@ class PlayerControllerCommands(MixinMeta, metaclass=CompositeMetaClass):
         elif react == "next":
             await self._clear_react(message, emoji)
             await ctx.invoke(self.command_skip)
-        elif react == "rewind":
-            await self._clear_react(message, emoji)
-            await ctx.invoke(self.command_seek, seconds=-30)
-        elif react == "seek":
-            await self._clear_react(message, emoji)
-            await ctx.invoke(self.command_seek, seconds=30)
         elif react == "shuffle":
             await self._clear_react(message, emoji)
             await ctx.invoke(self.command_shuffle)
+        elif react == "repeat":
+            await self._clear_react(message, emoji)
+            await ctx.invoke(self.command_repeat)
         elif react == "close":
             await message.delete()
 
