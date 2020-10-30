@@ -1,6 +1,6 @@
 import discord, datetime, asyncio, aiohttp, decimal
 from redbot.core import commands, checks, Config
-from redbot.core.utils.chat_formatting import humanize_number, humanize_timedelta
+from redbot.core.utils.chat_formatting import humanize_number, humanize_timedelta,
 
 from .sqlconnect import connect
 from databases import Database
@@ -18,13 +18,20 @@ class DiscordMembers(commands.Cog):
 
 
     @discord.ext.tasks.loop(minutes=1.0)
-    async def update_db(self):
-        guilds = ['269912749327253504', '759037208341774367']
-        for guild_id in guilds:
-            guild = bot.get_guild(guild_id)
+        async def update_db(self):
+            guild = bot.get_guild(269912749327253504)
             total_guild_members = (str(len(guild.members)))
             VALUES = [
-                {"guild": guild_id, "count": total_guild_members,}
+                {"guild": guild, "count": total_guild_members,}
+            ]
+            connect("INSERT INTO discord_members (guild, count) VALUES(:guild, :count) ON DUPLICATE KEY UPDATE count = :count;" )
+
+    @discord.ext.tasks.loop(minutes=1.0)
+        async def update_db(self):
+            guild = bot.get_guild(269912749327253504)
+            total_guild_members = (str(len(guild.members)))
+            VALUES = [
+                {"guild": guild, "count": total_guild_members,}
             ]
             connect("INSERT INTO discord_members (guild, count) VALUES(:guild, :count) ON DUPLICATE KEY UPDATE count = :count;" )
 
