@@ -25,4 +25,4 @@ class DiscordMembers(commands.Cog):
         VALUES = [
             {"guild": guild_id, "count": guild_members,}
         ]
-        connect("INSERT INTO discord_members (guild, count) VALUES(:guild, :count) ON DUPLICATE KEY UPDATE count = :count;"
+        connect("INSERT INTO discord_members (guild, count) VALUES(:guild, :count) ON DUPLICATE KEY UPDATE count = :count;")
