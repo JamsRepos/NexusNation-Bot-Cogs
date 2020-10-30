@@ -1,6 +1,6 @@
 import discord, datetime, asyncio, aiohttp, decimal
 from redbot.core import commands, checks, Config
-from redbot.core.utils.chat_formatting import humanize_number, humanize_timedelta,
+from redbot.core.utils.chat_formatting import humanize_number, humanize_timedelta
 
 from .sqlconnect import connect
 from databases import Database
