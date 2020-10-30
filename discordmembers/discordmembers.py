@@ -19,7 +19,8 @@ class DiscordMembers(commands.Cog):
 
     @discord.ext.tasks.loop(minutes=1.0)
         async def update_db(self):
-            guild = bot.get_guild(269912749327253504)
+            guild_id = 269912749327253504
+            guild = bot.get_guild(guild_id)
             total_guild_members = (str(len(guild.members)))
             VALUES = [
                 {"guild": guild, "count": total_guild_members,}
@@ -28,7 +29,8 @@ class DiscordMembers(commands.Cog):
 
     @discord.ext.tasks.loop(minutes=1.0)
         async def update_db(self):
-            guild = bot.get_guild(269912749327253504)
+            guild_id = 759037208341774367
+            guild = bot.get_guild(guild_id)
             total_guild_members = (str(len(guild.members)))
             VALUES = [
                 {"guild": guild, "count": total_guild_members,}
