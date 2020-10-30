@@ -24,7 +24,7 @@ class DiscordMembers(commands.Cog):
             guild = bot.get_guild(guild_id)
             total_guild_members = (str(len(guild.members)))
             VALUES = [
-                {"guild": guild_id, "count": total_guild_members,
+                {"guild": guild_id, "count": total_guild_members,}
             ]
             connect("INSERT INTO discord_members (guild, count) VALUES(:guild, :count) ON DUPLICATE KEY UPDATE count = :count;" )
 
