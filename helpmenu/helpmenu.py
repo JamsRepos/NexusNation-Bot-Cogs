@@ -56,6 +56,7 @@ class HelpMenu(commands.Cog):
         author = ctx.author
         await ctx.tick()
         message = "test"
+        guild_nexusnation = 759037208341774367
         Test = None
 
         connections = len(lavalink.all_players())
@@ -89,7 +90,8 @@ class HelpMenu(commands.Cog):
         )
         page2.add_field(name="Moderation Commands - 21", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
-        page2.add_field(name="Nexus Commands - 2", value=nexuscommands, inline=False)
+        if ctx.message.guild.id == guild_nexusnation:
+            page2.add_field(name="Nexus Commands - 2", value=nexuscommands, inline=False)
         page2.add_field(
             name="Utility Commands - 15", value=utilitycommands, inline=False
         )
