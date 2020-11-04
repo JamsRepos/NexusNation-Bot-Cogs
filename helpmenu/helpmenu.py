@@ -77,6 +77,7 @@ class HelpMenu(commands.Cog):
         generalcommands = """`ping` `avatar` `snapchat` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
         moderationcommands = """`prune` `cleanup` `ban` `hackban` `ignore` `kick` `modset` `mute` `names` `rename` `slowmode` `softban` `tempban` `unban` `unignore` `unmute` `modlogsetup` `modlogset` `case` `casefor` `reason`"""
         musiccommands = """`audioset` `audiostats` `bump` `disconnect` `summon` `local` `np` `pause` `percent` `play` `playlist` `prev` `queue` `remove` `repeat` `search` `seek` `shuffle` `skip` `stop` `volume` `lyrics`"""
+        nexusonlycommands = """`claimtokens` `tokenreminder` `claimvip` `vipreminder` `suggest` `missing` `appeal` `apply` `report` `calladmin` `differs` `bugreport` `vip`"""
         nexuscommands = """`jb` `ttt` `surf` `bhop`"""
         utilitycommands = """`starboard` `customcom`  `filter` `filterset` `autorole` `alias` `google` `away` `toggleaway` `gif` `imgtfy` `imgur` `covid` `color` `autoroom` `autoroomset`"""
         page2 = discord.Embed(colour=(await ctx.embed_colour()))
@@ -91,7 +92,8 @@ class HelpMenu(commands.Cog):
         page2.add_field(name="Moderation Commands - 21", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
         if ctx.message.guild.id == guild_nexusnation:
-            page2.add_field(name="Nexus Commands - " + len(nexuscommands), value=nexuscommands, inline=False)
+            page2.add_field(name="Nexus Guild Commands - 13", value=nexusonlycommands inline=False)
+        page2.add_field(name="Nexus Stats Commands - 4", value=nexuscommands, inline=False)
         page2.add_field(
             name="Utility Commands - 15", value=utilitycommands, inline=False
         )
