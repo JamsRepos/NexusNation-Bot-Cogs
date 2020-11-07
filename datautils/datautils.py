@@ -231,8 +231,8 @@ class DataUtils(commands.Cog):
             em.add_field(name=_("Nickname"), value=member.nick)
         else:
             em.add_field(name=_("Name"), value=member.name)
-        em.add_field(name=_("Joined server"), value=member.joined_at.strftime(self.TIME_FORMAT))
         em.add_field(name="ID", value=member.id)
+        em.add_field(name=_("Joined server"), value=member.joined_at.strftime(self.TIME_FORMAT))
         em.add_field(
             name=_("Exists since"),
             value=member.created_at.strftime(self.TIME_FORMAT),
