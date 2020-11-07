@@ -244,11 +244,6 @@ class DataUtils(commands.Cog):
             )
         if member.voice:
             em.add_field(name=_("In voice channel"), value=member.voice.channel.mention)
-        em.add_field(
-            name=_("Mention"),
-            value=f"{member.mention}\n{chat.inline(member.mention)}",
-            inline=False,
-        )
         if roles := [role.name for role in member.roles if not role.is_default()]:
             em.add_field(
                 name=_("Roles"),
