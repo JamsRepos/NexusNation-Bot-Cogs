@@ -229,16 +229,6 @@ class DataUtils(commands.Cog):
             em.add_field(name=_("Nickname"), value=member.nick)
         else:
             em.add_field(name=_("Name"), value=member.name)
-        em.add_field(
-            name=_("Client"),
-            value="📱: {}\n"
-            "🖥: {}\n"
-            "🌎: {}".format(
-                str(member.mobile_status).capitalize(),
-                str(member.desktop_status).capitalize(),
-                str(member.web_status).capitalize(),
-            ),
-        )
         em.add_field(name=_("Joined server"), value=member.joined_at.strftime(self.TIME_FORMAT))
         em.add_field(name="ID", value=member.id)
         em.add_field(
