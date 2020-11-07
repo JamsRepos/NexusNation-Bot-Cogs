@@ -101,6 +101,8 @@ class DataUtils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.TIME_FORMAT = _("%d.%m.%Y %H:%M:%S %Z")
+        self.bot.remove_command("serverinfo")
+        self.bot.remove_command("userinfo")
 
     async def red_delete_data_for_user(self, **kwargs):
         return
@@ -214,7 +216,7 @@ class DataUtils(commands.Cog):
             em.add_field(name=_("Widget's invite"), value=widget.invite_url)
         await ctx.send(embed=em)
 
-    @commands.command(aliases=["memberinfo", "membinfo"])
+    @commands.command(aliases=["memberinfo", "membinfo", "userinfo"])
     @commands.guild_only()
     @checks.bot_has_permissions(embed_links=True)
     async def uinfo(self, ctx, *, member: discord.Member = None):
@@ -228,7 +230,7 @@ class DataUtils(commands.Cog):
         if member.nick:
             em.add_field(name=_("Nickname"), value=member.nick)
         else:
-            em.add_field(name=_("Name"), value=member.name)
+        em.add_field(name=_("Name"), value=member.name)
         em.add_field(name=_("Joined server"), value=member.joined_at.strftime(self.TIME_FORMAT))
         em.add_field(name="ID", value=member.id)
         em.add_field(
@@ -255,7 +257,7 @@ class DataUtils(commands.Cog):
             )
         if member.public_flags.value:
             em.add_field(
-                name=_("Public flags"),
+                name=_("Discord Badges"),
                 value="\n".join(
                     [
                         str(flag)[10:].replace("_", " ").capitalize()
@@ -284,7 +286,7 @@ class DataUtils(commands.Cog):
         else:
             await ctx.send(chat.info(_("Right now this user is doing nothing")))
 
-    @commands.command(aliases=["servinfo", "serv", "sv"])
+    @commands.command(aliases=["servinfo", "serv", "sv", "serverinfo"])
     @commands.guild_only()
     @checks.bot_has_permissions(embed_links=True)
     async def sinfo(self, ctx, *, server: commands.GuildConverter = None):
