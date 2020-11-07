@@ -245,8 +245,6 @@ class DataUtils(commands.Cog):
             name=_("Exists since"),
             value=member.created_at.strftime(self.TIME_FORMAT),
         )
-        if member.color.value:
-            em.add_field(name=_("Color"), value=member.colour)
         if member.premium_since:
             em.add_field(
                 name=_("Boosted server"),
