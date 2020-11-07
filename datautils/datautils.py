@@ -284,8 +284,8 @@ class DataUtils(commands.Cog):
                 ),
                 inline=False,
             )
-        em.set_image(url=member.avatar_url_as(static_format="png", size=4096))
-        # em.set_thumbnail(url=member.default_avatar_url)
+        #em.set_image(url=member.avatar_url_as(static_format="png", size=4096))
+        em.set_thumbnail(url=ctx.bot.user.avatar_url)
         await ctx.send(embed=em)
 
     @commands.command(aliases=["activity"])
