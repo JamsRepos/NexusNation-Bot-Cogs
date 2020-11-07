@@ -252,11 +252,6 @@ class DataUtils(commands.Cog):
                 name=_("Boosted server"),
                 value=member.premium_since.strftime(self.TIME_FORMAT),
             )
-        em.add_field(
-            name=_("Server permissions"),
-            value="[{0}](https://fixator10.ru/permissions-calculator/?v={0})".format(
-                member.guild_permissions.value
-            ),
         )
         if member.voice:
             em.add_field(name=_("In voice channel"), value=member.voice.channel.mention)
