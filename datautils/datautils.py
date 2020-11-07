@@ -252,8 +252,6 @@ class DataUtils(commands.Cog):
                 name=_("Boosted server"),
                 value=member.premium_since.strftime(self.TIME_FORMAT),
             )
-        em.add_field(name=_("Bot?"), value=bool_emojify(member.bot))
-        em.add_field(name=_("System?"), value=bool_emojify(member.system))
         em.add_field(
             name=_("Server permissions"),
             value="[{0}](https://fixator10.ru/permissions-calculator/?v={0})".format(
