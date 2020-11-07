@@ -19,25 +19,8 @@ class HelpMenu(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.bot.remove_command("help")
-        # self.bot.remove_command("info")
-
-    # ctx.bot.user.name
-    # if ctx.invoked_subcommand is None:
-    #       await ctx.send_help()
 
     @commands.command(hidden=True)
-    @commands.guild_only()
-    async def testing(self, ctx, *, commandname: str = None):
-        Test = None
-        if commandname is not None:
-            await ctx.bot.send_help_for(ctx, commandname)
-        if commandname == "all":
-            await ctx.bot.send_help_for(ctx, Test)
-        else:
-            await ctx.send("MENU")
-
-    @commands.command(hidden=True)
-    # @commands.guild_only()
     async def help(self, ctx, *, command=None):
         prefix_string = ctx.prefix
         dpy_version = discord.__version__
@@ -52,10 +35,10 @@ class HelpMenu(commands.Cog):
 
         since = ctx.bot.uptime.strftime("%d-%m-%y at %H:%M:%S")
         title = "Nexus Help Menu:"
-        # emoji = ctx.bot.get_emoji(445640284202729472)
         author = ctx.author
         await ctx.tick()
         message = "test"
+        guild_nexusnation = 269912749327253504
         Test = None
 
         connections = len(lavalink.all_players())
@@ -76,11 +59,11 @@ class HelpMenu(commands.Cog):
         generalcommands = """`ping` `avatar` `snapchat` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
         moderationcommands = """`prune` `cleanup` `ban` `hackban` `ignore` `kick` `modset` `mute` `names` `rename` `slowmode` `softban` `tempban` `unban` `unignore` `unmute` `modlogsetup` `modlogset` `case` `casefor` `reason`"""
         musiccommands = """`audioset` `audiostats` `bump` `disconnect` `summon` `local` `np` `pause` `percent` `play` `playlist` `prev` `queue` `remove` `repeat` `search` `seek` `shuffle` `skip` `stop` `volume` `lyrics`"""
+        nexusonlycommands = """`claimtokens` `tokenreminder` `claimvip` `vipreminder` `suggest` `missing` `appeal` `apply` `report` `calladmin` `differs` `bugreport` `vip` `role `profile` `profileset` `background` `toplevel`"""
         nexuscommands = """`jb` `ttt` `surf` `bhop`"""
-        utilitycommands = """`starboard` `customcom`  `filter` `filterset` `autorole` `alias` `google` `away` `toggleaway` `gif` `imgtfy` `imgur` `covid` `color` `autoroom` `autoroomset`"""
+        utilitycommands = """`starboard` `customcom`  `filter` `filterset` `autorole` `alias` `google` `gif` `imgtfy` `imgur` `covid` `color` `autoroom` `autoroomset`"""
         page2 = discord.Embed(colour=(await ctx.embed_colour()))
         page2.set_author(name=title, icon_url=ctx.bot.user.avatar_url)
-        # page2.set_thumbnail(url=ctx.bot.user.avatar_url)
         page2.add_field(
             name="Server Prefix", value="`{}`".format((prefix_string)), inline=False
         )
@@ -89,7 +72,9 @@ class HelpMenu(commands.Cog):
         )
         page2.add_field(name="Moderation Commands - 21", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
-        page2.add_field(name="Nexus Commands - 2", value=nexuscommands, inline=False)
+        if ctx.message.guild.id == guild_nexusnation:
+            page2.add_field(name="NexusNation Guild Only Commands - 18", value=nexusonlycommands, inline=False)
+        page2.add_field(name="Nexus Stats Commands - 4", value=nexuscommands, inline=False)
         page2.add_field(
             name="Utility Commands - 15", value=utilitycommands, inline=False
         )
@@ -105,21 +90,13 @@ class HelpMenu(commands.Cog):
             name="Libs",
             value="[`Discord.py`](https://github.com/Rapptz/discord.py)\n[`Red`](https://github.com/Cog-Creators/Red-DiscordBot)\n[`Lavalink.py`](https://github.com/Devoxin/Lavalink.py)",
         )
-        # page4.add_field(name="Source", value="[Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot)")
         page3.set_footer(text=f"Page 3/3 | Last Restart: {since}")
 
         embeds = [page1, page2, page3]
         if command == "all":
-            # await ctx.author.send(await ctx.bot.send_help_for(ctx, Test))
             await ctx.bot.send_help_for(ctx, Test)
         if command is None:
             await menu(ctx, embeds, DEFAULT_CONTROLS)
         if command is not None:
             await ctx.bot.send_help_for(ctx, command)
         return
-
-        # await author.send("text")
-        # await author.send(embed=page1)
-        # await author.send(embed=page2)
-        # await author.send(embed=page3)
-        # await author.send(embed=page4)

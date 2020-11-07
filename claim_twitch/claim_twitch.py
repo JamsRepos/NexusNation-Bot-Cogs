@@ -182,7 +182,7 @@ class Claim_Twitch(commands.Cog):
                         break
                     elif r.id != self.role_id:
                         has_role = False
-                if (has_role == True) and (lastclaim <= (timenow-604800)) and (await self.config.member(self.bot.get_guild(self.guild_id).get_member(member.id)).remind() == True):
+                if (has_role == True) and (lastclaim <= (timenow-2592000)) and (await self.config.member(self.bot.get_guild(self.guild_id).get_member(member.id)).remind() == True):
                     discord_member_id = '<@!'+str(member.id)+'>'
                     await channel.send(discord_member_id + ", You can now claim free VIP, type `!claimvip` in <#269933786853015553>. This reminder will stop once you claim your reward or use ``!vipreminder`` to toggle this alert.") 
                     has_role = False
