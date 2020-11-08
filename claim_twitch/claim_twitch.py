@@ -46,7 +46,7 @@ class Claim_Twitch(commands.Cog):
         default_guild = {
             "package": 0,
             "couldown": 31, ##cooldown is in days, cuz it's easier
-            "role_name": "Twitch Subscriber"
+            "role_name": "Jam's Twitch Sub"
         }
         default_member = {
             "last_claim": 0,
