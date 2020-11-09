@@ -74,13 +74,13 @@ class HelpMenu(commands.Cog):
         page2.add_field(
             name="Server Prefix", value="`{}`".format((prefix_string)), inline=False
         )
-        page2.add_field(name=f"General commands - {len(generalcommands)}", value=(', '.join(map(str, generalcommands))), inline=False)
-        page2.add_field(name=f"Moderation Commands - {len(moderationcommands)}", value=(', '.join(map(str, moderationcommands))), inline=False)
-        page2.add_field(name=f"Music Commands - {len(musiccommands)}", value=(', '.join(map(str, musiccommands))), inline=False)
+        page2.add_field(name=f"General commands - {len(generalcommands)}", value=(' '.join(map(str, generalcommands))), inline=False)
+        page2.add_field(name=f"Moderation Commands - {len(moderationcommands)}", value=(' '.join(map(str, moderationcommands))), inline=False)
+        page2.add_field(name=f"Music Commands - {len(musiccommands)}", value=(' '.join(map(str, musiccommands))), inline=False)
         if ctx.message.guild.id == guild_nexusnation:
-            page2.add_field(name=f"NexusNation Guild Only Commands - {len(nexusonlycommands)}", value=(', '.join(map(str, nexusonlycommands))), inline=False)
-        page2.add_field(name=f"Nexus Stats Commands - {len(nexuscommands)}", value=(', '.join(map(str, nexuscommands))), inline=False)
-        page2.add_field(name=f"Utility Commands - {len(utilitycommands)}", value=(', '.join(map(str, utilitycommands))), inline=False)
+            page2.add_field(name=f"NexusNation Guild Only Commands - {len(nexusonlycommands)}", value=(' '.join(map(str, nexusonlycommands))), inline=False)
+        page2.add_field(name=f"Nexus Stats Commands - {len(nexuscommands)}", value=(' '.join(map(str, nexuscommands))), inline=False)
+        page2.add_field(name=f"Utility Commands - {len(utilitycommands)}", value=(' '.join(map(str, utilitycommands))), inline=False)
         page2.set_footer(text="Page 2/3 | Last Restart: {}".format(since))
 
         # PAGE 3
