@@ -74,7 +74,7 @@ class HelpMenu(commands.Cog):
         page2.add_field(
             name="Server Prefix", value="`{}`".format((prefix_string)), inline=False
         )
-        page2.add_field(name="General Commands - " + len(int(generalcommands)), value=(' '.join(map(str, generalcommands))), inline=False)
+        page2.add_field(name="General Commands - " + len(generalcommands), value=(' '.join(map(str, generalcommands))), inline=False)
         page2.add_field(name="Moderation Commands - 21", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
         if ctx.message.guild.id == guild_nexusnation:
