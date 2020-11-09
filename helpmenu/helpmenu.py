@@ -56,7 +56,7 @@ class HelpMenu(commands.Cog):
         page1.set_footer(text="Page 1/3 | Last Restart: {}".format(since))
 
         # PAGE 2
-        generalcommands = ["ping", "avatar", "snapchat", "invite", "contact", "prefix", "stats," "userinfo", "serverinfo"]
+        generalcommands = ["ping", "avatar", "snapchat", "invite", "contact", "prefix", "stats", "userinfo", "serverinfo"]
         moderationcommands = ["prune", "cleanup", "ban", "hackban", "ignore", "kick", "modset", "mute", "names", "rename", "slowmode", "softban", "tempban", "unban", "unignore", "unmute", "modlogsetup", "modlogset", "case", "casefor", "reason"]
         musiccommands = ["audioset", "audiostats", "bump", "disconnect", "summon", "local", "np", "pause", "percent", "play", "playlist", "prev", "queue", "remove", "repeat", "search", "seek", "shuffle", "skip", "stop", "volume", "lyrics"]
         nexusonlycommands = ["claimtokens", "tokenreminder", "claimvip", "vipreminder", "suggest", "missing", "appeal", "apply", "report", "calladmin", "differs", "bugreport", "vip", "role", "profile", "profileset", "background", "toplevel"]
@@ -74,7 +74,7 @@ class HelpMenu(commands.Cog):
         page2.add_field(
             name="Server Prefix", value="`{}`".format((prefix_string)), inline=False
         )
-        page2.add_field(name="General Commands - 9", value="`" + (' '.join(map(str, generalcommands)) + "`"), inline=False)
+        page2.add_field(name="General Commands - 9", value="" + (' '.join(map(str, generalcommands)) + ""), inline=False)
         page2.add_field(name="Moderation Commands - 21", value=moderationcommands, inline=False)
         page2.add_field(name="Music Commands - 25", value=musiccommands, inline=False)
         if ctx.message.guild.id == guild_nexusnation:
