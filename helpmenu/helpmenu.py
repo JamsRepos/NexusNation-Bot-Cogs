@@ -56,12 +56,12 @@ class HelpMenu(commands.Cog):
         page1.set_footer(text="Page 1/3 | Last Restart: {}".format(since))
 
         # PAGE 2
-        generalcommands = ["ping", "avatar", "snapchat", "invite", "contact", "prefix", "stats", "userinfo", "serverinfo"]
-        moderationcommands = ["prune", "cleanup", "ban", "hackban", "ignore", "kick", "modset", "mute", "names", "rename", "slowmode", "softban", "tempban", "unban", "unignore", "unmute", "modlogsetup", "modlogset", "case", "casefor", "reason"]
-        musiccommands = ["audioset", "audiostats", "bump", "disconnect", "summon", "local", "np", "pause", "percent", "play", "playlist", "prev", "queue", "remove", "repeat", "search", "seek", "shuffle", "skip", "stop", "volume", "lyrics"]
-        nexusonlycommands = ["claimtokens", "tokenreminder", "claimvip", "vipreminder", "suggest", "missing", "appeal", "apply", "report", "calladmin", "differs", "bugreport", "vip", "role", "profile", "profileset", "background", "toplevel"]
-        nexuscommands = ["jb", "ttt", "surf", "bhop"]
-        utilitycommands = ["starboard", "customcom", "filter", "filterset", "autorole", "alias", "google", "gif", "imgtfy", "imgur", "covid", "color", "autoroom", "autoroomset"]
+        generalcommands = ['ping', 'avatar', 'snapchat', 'invite', 'contact', 'prefix', 'stats', 'userinfo', 'serverinfo']
+        moderationcommands = ['prune', 'cleanup', 'ban', 'hackban', 'ignore', 'kick', 'modset', 'mute', 'names', 'rename', 'slowmode', 'softban', 'tempban', 'unban', 'unignore', 'unmute', 'modlogsetup', 'modlogset', 'case', 'casefor', 'reason']
+        musiccommands = ['audioset', 'audiostats', 'bump', 'disconnect', 'summon', 'local', 'np', 'pause', 'percent', 'play', 'playlist', 'prev', 'queue', 'remove', 'repeat', 'search', 'seek', 'shuffle', 'skip', 'stop', 'volume', 'lyrics']
+        nexusonlycommands = ['claimtokens', 'tokenreminder', 'claimvip', 'vipreminder', 'suggest', 'missing', 'appeal', 'apply', 'report', 'calladmin', 'differs', 'bugreport', 'vip', 'role', 'profile', 'profileset', 'background', 'toplevel']
+        nexuscommands = ['jb', 'ttt', 'surf', 'bhop']
+        utilitycommands = ['starboard', 'customcom', 'filter', 'filterset', 'autorole', 'alias', 'google', 'gif', 'imgtfy', 'imgur', 'covid', 'color', 'autoroom', 'autoroomset']
 
         # generalcommands = """`ping" `avatar` `snapchat` `invite` `contact` `prefix` `stats` `userinfo` `serverinfo`"""
         # moderationcommands = """`prune` `cleanup` `ban` `hackban` `ignore` `kick` `modset` `mute` `names` `rename` `slowmode` `softban` `tempban` `unban` `unignore` `unmute` `modlogsetup` `modlogset` `case` `casefor` `reason`"""
