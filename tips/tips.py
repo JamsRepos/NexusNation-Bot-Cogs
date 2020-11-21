@@ -48,13 +48,13 @@ class Tips(commands.Cog):
 
         self.config.register_global(**default_global)
         self.no_map_msg = "If you are having trouble downloading maps from our servers or any other server for that matter, this is quite an easy fix. If you have ESEA, FACEIT, or CEVO client/AC open, exit these programs and ensure they are no longer running. Restart your game and try to rejoin."
-        self.appeal_msg = "To appeal a punishment click [`here`](https://thenexusnation.com/appeal.php) and fill out all applicable boxes. Be sure to read the appeal rules before submitting."    
-        self.apply_msg = "To apply for staff click [`here`](https://thenexusnation.com/apply.php) and fill out all **all** boxes. Be sure to read the **application rules** before submitting." 
+        self.appeal_msg = "To appeal a punishment click [`here`](https://nexusnation.gg/form/?id=3) and fill out all applicable boxes. Be sure to read the appeal rules before submitting."    
+        self.apply_msg = "To apply for staff click [`here`](https://nexusnation.gg/form/?id=2) and fill out all **all** boxes. Be sure to read the **application rules** before submitting." 
         self.report_msg = "To report a player go to <#387538349663191041> and open a ticket relating to your issue."
         self.calladmin_msg = "If the player is still in the server please use `!calladmin` in game. If you are able to use something like shadowplay to gather evidence please do.\n If the member if no longer in the server please open a ticket in <#{}> and provide as much evidence as possible.".format(387538349663191041)
         self.differs_msg = "If you are kicked from the server with a message mentioning that your map differs from the servers do the following:\n1 - Navigate to your maps folder `SteamLibrary\\steamapps\\common\\Counter-Strike Global Offensive\\csgo\\maps`\n2 - Delete the map that differs from the servers\n3 - Try to reconnect to the server"
-        self.vip_msg = "• Unique Rank in our Discord server\n• **Partial** Development Server Access\n• **2x** in game credits multiplier\n• **2** round arena challenge cooldown\n• **1x** vote extend per map\n• Ability to create a Custom VIP Tag\n• Combat Servers Ghost upon Death\n• Ability to talk in chat when dead on Jailbreak\n• VIP items on the Black Market & Federal Arsenal\n• Access to the VIP Area in the [In-Game Store](https://thenexusnation.com/store-guide.php)\n• Access to **!gloves**, **!mm**, **!pin** & **!level** commands\n• Access to **!tag**, **!squad** & **!gang** commands"
-        self.vipplus_msg = "• Unique Rank in our Discord server\n• **Full** Development Server Access\n• **4x** in game credits multiplier\n• **0** round arena challenge cooldown\n• **3x** vote extend per map\n• Ability to create a Custom VIP Tag\n• Combat Servers Ghost upon Death\n• Ability to talk in chat when dead on Jailbreak\n• VIP items on the Black Market & Federal Arsenal\n• Access to the VIP Area in the [In-Game Store](https://thenexusnation.com/store-guide.php)\n• Access to **!gloves**, **!mm**, **!pin** & **!level** commands\n• Access to **!tag**, **!squad** & **!gang** commands\n• Ability to Set Text Colour\n• Force Next Map (!selectmap)\n• Double RTV/Map Votes\n• Access to **!votemute**, **!votegag** & **!votesilence** commands\n• Access to Fortnite & Twitch Emotes\n• Access to Any Weapon Skins"
+        self.vip_msg = "• Unique Rank in our Discord server\n• **Partial** Development Server Access\n• **2x** in game credits multiplier\n• **2** round arena challenge cooldown\n• **1x** vote extend per map\n• Ability to create a Custom VIP Tag\n• Combat Servers Ghost upon Death\n• Ability to talk in chat when dead on Jailbreak\n• VIP items on the Black Market & Federal Arsenal\n• Access to the VIP Area in the [In-Game Store](https://nexusnation.gg/guides/)\n• Access to **!gloves**, **!mm**, **!pin** & **!level** commands\n• Access to **!tag**, **!squad** & **!gang** commands"
+        self.vipplus_msg = "• Unique Rank in our Discord server\n• **Full** Development Server Access\n• **4x** in game credits multiplier\n• **0** round arena challenge cooldown\n• **3x** vote extend per map\n• Ability to create a Custom VIP Tag\n• Combat Servers Ghost upon Death\n• Ability to talk in chat when dead on Jailbreak\n• VIP items on the Black Market & Federal Arsenal\n• Access to the VIP Area in the [In-Game Store](https://nexusnation.gg/guides/)\n• Access to **!gloves**, **!mm**, **!pin** & **!level** commands\n• Access to **!tag**, **!squad** & **!gang** commands\n• Ability to Set Text Colour\n• Force Next Map (!selectmap)\n• Double RTV/Map Votes\n• Access to **!votemute**, **!votegag** & **!votesilence** commands\n• Access to Fortnite & Twitch Emotes\n• Access to Any Weapon Skins"
         self.bug_msg = "To report a bug use the command `!bug` followed by one of our server names and your bug report.\nThe finished command should look something like this `!bug jailbreak reason`"
         self.leveltwo_msg = "You must be above level 2 (at least level 3) on CS:GO in order to play on our servers.\nIf you are not yet level 2 and wish to play on our servers, you should play some deathmatch/casual games to level up!\n\nBy purchasing [VIP](https://nexushub.io/) you are able to bypass this check and will be able to join our servers no matter your level."
         self.suggest_msg = "To make a suggestion, visit the <#269933786853015553> channel and type `!suggest` followed by your suggestion"
@@ -358,11 +358,11 @@ class Tips(commands.Cog):
     @commands.cooldown(1, 180, commands.BucketType.guild)
     async def vip(self, ctx):
         vip_embed = discord.Embed(color=0xff2f34)
-        vip_embed.set_author(name="VIP/VIP+ Information", url="https://nexushub.io/", icon_url="https://thenexusnation.com/img/logo.png")
+        vip_embed.set_author(name="VIP/VIP+ Information", url="https://nexushub.io/", icon_url="https://nexusnation.gg/assets/img/logo.png")
         vip_embed.add_field(name="Information", value="Purchase VIP or VIP+ by visiting the NexusNation [store](https://nexushub.io/).", inline=False)
         vip_embed.add_field(name="VIP Features", value="{}".format(self.vip_msg), inline=True)
         vip_embed.add_field(name="VIP +Features", value="{}".format(self.vipplus_msg), inline=True)
-        vip_embed.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+        vip_embed.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
         await ctx.message.delete()
         await ctx.send(embed=vip_embed)
 
@@ -372,7 +372,7 @@ class Tips(commands.Cog):
         bad_reaction_one = discord.Embed(title="Thanks for your feedback", description="Sorry to hear that your problem has not been fixed <@!{}>. Please open a ticket in <#689913408979468293> for further assistance".format(message.author.id), color=0x000000)
         bad_reaction_two = discord.Embed(title="Thanks for your feedback",description="This will help us improve the bot.", color=0x000000)
         bad_reaction_two.set_thumbnail(url="https://media1.tenor.com/images/8b5f9ae2d38e55483bf4cb1d01c281e6/tenor.gif")
-        bad_reaction_two.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+        bad_reaction_two.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
         timed_out = discord.Embed(title="We hope this helped fix your problem", description="Although you did not give feedback in time, we hope this message helped fix your problem.\n\nIf you have any other questions or need any more help please open a ticket in <#387538349663191041>",color=0x06ff00)
 
 ####################################################################################-RESPONSES-######################################################################################################
@@ -381,7 +381,7 @@ class Tips(commands.Cog):
                 if message.author.id not in self.command_maker:
 
                     self.embed=discord.Embed(title="Map Download Issues", description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.no_map_msg), color=0x626262)
-                    embed_green=discord.Embed(title="Map Download Issues", description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.no_map_msg), color=0x06ff00)
+                    embed_green=discord.Embed(title="Map Download Issues", description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.no_map_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -396,7 +396,7 @@ class Tips(commands.Cog):
                 if message.author.id not in self.command_maker:
                     
                     self.embed=discord.Embed(title="Appealing a punishment", description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.appeal_msg), color=0x626262)
-                    embed_green=discord.Embed(title="Appealing a punishment", description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.appeal_msg), color=0x06ff00)
+                    embed_green=discord.Embed(title="Appealing a punishment", description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.appeal_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -411,7 +411,7 @@ class Tips(commands.Cog):
                 if message.author.id not in self.command_maker:
 
                     self.embed=discord.Embed(title="Applying for staff", description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.apply_msg), color=0x626262)
-                    embed_green=discord.Embed(title="Applying for staff", description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.apply_msg), color=0x06ff00)
+                    embed_green=discord.Embed(title="Applying for staff", description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.apply_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -426,7 +426,7 @@ class Tips(commands.Cog):
                 if message.author.id not in self.command_maker:
 
                     self.embed=discord.Embed(title="Reporting a player/bug", description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.report_msg), color=0x626262)
-                    embed_green=discord.Embed(title="Reporting a player/bug", description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.report_msg), color=0x06ff00)
+                    embed_green=discord.Embed(title="Reporting a player/bug", description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.report_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -441,7 +441,7 @@ class Tips(commands.Cog):
                 if message.author.id not in self.command_maker:
 
                     self.embed=discord.Embed(title="Using !calladmin", description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.calladmin_msg), color=0x626262)
-                    embed_green=discord.Embed(title="Using !calladmin", description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.calladmin_msg), color=0x06ff00)
+                    embed_green=discord.Embed(title="Using !calladmin", description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.calladmin_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -456,7 +456,7 @@ class Tips(commands.Cog):
                 if message.author.id not in self.command_maker:
 
                     self.embed=discord.Embed(title="Map Differs Issue", description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.differs_msg), color=0x626262)
-                    embed_green=discord.Embed(title="Map Differs Issue", description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.differs_msg), color=0x06ff00)
+                    embed_green=discord.Embed(title="Map Differs Issue", description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.differs_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -471,7 +471,7 @@ class Tips(commands.Cog):
                 if message.author.id not in self.command_maker:
 
                     self.embed=discord.Embed(title="Must Be Level Above Level 2", description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.leveltwo_msg), color=0x626262)
-                    embed_green=discord.Embed(title="Must Be Level Above Level 2", description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.leveltwo_msg), color=0x06ff00)
+                    embed_green=discord.Embed(title="Must Be Level Above Level 2", description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.leveltwo_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -488,7 +488,7 @@ class Tips(commands.Cog):
                     self.embed = discord.Embed(title="How to make a suggestion",
                                             description="{}\n\n**If this message was helpful, please react with a **<:tick:445640284202729472> **if not, react with a **<:cross:445640325780865035>**.**".format(self.suggest_msg), color=0x626262)
                     embed_green = discord.Embed(title="How to make a suggestion",
-                                                description="{}\n\n**Thank you for your feedback • TheNexusNation.com**".format(self.suggest_msg), color=0x06ff00)
+                                                description="{}\n\n**Thank you for your feedback • NexusNation.gg**".format(self.suggest_msg), color=0x06ff00)
                     self.embed = await message.channel.send(
                         content=message.author.mention,
                         embed=self.embed
@@ -508,7 +508,7 @@ class Tips(commands.Cog):
                             embedBadWord=discord.Embed(description="This message was flagged for a forbidden phrase.", color=0xff00d0)
                             embedBadWord.set_author(name="{} has said a forbidden phrase.".format(message.author),icon_url=message.author.avatar_url)
                             embedBadWord.add_field(name="Original Message", value=str(message.content), inline=False)
-                            embedBadWord.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+                            embedBadWord.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
                             await self.bot.get_channel(await self.config.logs_channel()).send(embed=embedBadWord)
                             await message.channel.send("<@!{}> please refrain from saying that.".format(message.author.id))
                             await message.delete()
@@ -536,7 +536,7 @@ class Tips(commands.Cog):
                         await self.embed.clear_reactions()
                         embed_success=discord.Embed(description="[Go to Message](https://discordapp.com/channels/{}/{}/{})".format(message.guild.id, message.channel.id, message.id), color=0x43ff0d)
                         embed_success.set_author(name="{} found this tip helpful".format(message.author),icon_url=message.author.avatar_url)
-                        embed_success.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+                        embed_success.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
                         await self.bot.get_channel(await self.config.logs_channel()).send(embed=embed_success)
 
                     elif str(reaction) == '<:cross:445640325780865035>' and user == message.author:
@@ -561,7 +561,7 @@ class Tips(commands.Cog):
                                 embedBad.set_author(name="{} did not find this tip helpful".format(message.author),icon_url=message.author.avatar_url)
                                 embedBad.add_field(name="Reason", value=value, inline=True)
                                 embedBad.add_field(name="Original Message", value=str(message.content), inline=False)
-                                embedBad.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+                                embedBad.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
                                 await self.bot.get_channel(await self.config.logs_channel()).send(embed=embedBad)
                                 
 
@@ -574,7 +574,7 @@ class Tips(commands.Cog):
                                 embedBad.set_author(name="{} did not find this tip helpful".format(message.author),icon_url=message.author.avatar_url)
                                 embedBad.add_field(name="Reason", value=value, inline=True)
                                 embedBad.add_field(name="Original Message", value=str(message.content), inline=False)
-                                embedBad.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+                                embedBad.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
                                 await self.bot.get_channel(await self.config.logs_channel()).send(embed=embedBad)
 
                         except asyncio.TimeoutError:
@@ -583,7 +583,7 @@ class Tips(commands.Cog):
                             embed_timedout=discord.Embed(description="[Go to Message](https://discordapp.com/channels/{}/{}/{})".format(message.guild.id, message.channel.id, message.id))
                             embed_timedout.set_author(name="{} did not respond in time.".format(message.author),icon_url=message.author.avatar_url)
                             embed_timedout.add_field(name="Original Message", value=str(message.content), inline=False)
-                            embed_timedout.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+                            embed_timedout.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
                             await self.bot.get_channel(await self.config.logs_channel()).send(embed=embed_timedout)
                             self.command_maker.clear()
                             pass
@@ -593,7 +593,7 @@ class Tips(commands.Cog):
                     embed_timedout=discord.Embed(description="[Go to Message](https://discordapp.com/channels/{}/{}/{})".format(message.guild.id, message.channel.id, message.id))
                     embed_timedout.set_author(name="{} did not respond in time.".format(message.author),icon_url=message.author.avatar_url)
                     embed_timedout.add_field(name="Original Message", value=str(message.content), inline=False)
-                    embed_timedout.set_footer(text="TheNexusNation.com • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
+                    embed_timedout.set_footer(text="NexusNation.gg • {} {}".format(self.now.strftime("%d/%m/%Y"), self.now.strftime("%H:%M")))
                     await self.bot.get_channel(await self.config.logs_channel()).send(embed=embed_timedout)
                     self.command_maker.clear()
                     pass
