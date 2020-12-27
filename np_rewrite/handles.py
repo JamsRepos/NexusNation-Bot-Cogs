@@ -2,6 +2,40 @@ import datetime
 import lavalink
 from redbot.core import commands
 
+async def player_check(ctx):
+    if not (cog := ctx.bot.get_cog("Audio").player_check()):
+        return False
+
+async def get_song_config(ctx):
+    if not (cog := ctx.bot.get_cog("Audio")):
+        return False
+    guild_data = await cog.config.guild(ctx.guild).all()
+    global_data = await cog.config.all()
+
+    shuffle = guild_data["shuffle"]
+    repeat = guild_data["repeat"]
+    autoplay = guild_data["auto_play"]
+
+    text = ""
+    text += (
+        "Auto-Play"
+        + ": "
+        + ("\N{WHITE HEAVY CHECK MARK}" if autoplay else "\N{CROSS MARK}")
+    )
+    text += (
+        (" | " if text else "")
+        + "Shuffle"
+        + ": "
+        + ("\N{WHITE HEAVY CHECK MARK}" if shuffle else "\N{CROSS MARK}")
+    )
+    text += (
+        (" | " if text else "")
+        + "Repeat"
+        + ": "
+        + ("\N{WHITE HEAVY CHECK MARK}" if repeat else "\N{CROSS MARK}")
+    )
+    return text
+
 async def format_time(time: int) -> str:
     """ Formats the given time into DD:HH:MM:SS """
     seconds = time / 1000
@@ -26,7 +60,8 @@ async def draw_time(ctx) -> str:
     sections = 23
     loc_time = round((pos / dur if dur != 0 else pos) * sections)
     bar = "\N{BOX DRAWINGS HEAVY HORIZONTAL}"
-    seek = "<:offlineicon:482526153840656385>"
+    # seek = "<:offlineicon:482526153840656385>"
+    seek = "<a:pingu_track:783129078546300938>"
     end_track = "⏭️"
     if paused:
         msg = "\N{DOUBLE VERTICAL BAR}\N{VARIATION SELECTOR-16}"
