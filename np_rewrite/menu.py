@@ -59,21 +59,30 @@ async def queue(
     ctx, pages, controls, message, page, timeout, emoji
 ):
     if message:
+        await message.delete()
         prev_com = ctx.bot.get_command("queue")
         output = await ctx.invoke(prev_com)
-        await message.delete()
         return output
 
 async def lyrics(
     ctx, pages, controls, message, page, timeout, emoji
 ):
     if message:
+        await message.delete()
         prev_com = ctx.bot.get_command("lyrics playing")
         output = await ctx.invoke(prev_com)
-        await message.delete()
         return output
 
+async def refresh(
+    ctx, pages, controls, message, page, timeout, emoji
+):
+    if message:
+        #await message.delete()
+        return await menu(ctx, pages, controls, message, 0, timeout)
+    
+
 controls = {
+    #"👀": refresh,
     "⏮️": prev_current,
     "⏹️": stop_current,
     "⏯️": pause_current,
