@@ -294,7 +294,7 @@ class QueryTNN(commands.Cog):
                 try:
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
-                    community_id = commid_to_steamid(result[0])
+                    community_id = result[0]
                     cursor.execute(f"SELECT rounds_played, rounds_won, shots_fired, damage_given, damage_taken, killed_innocents, killed_traitors, killed_detectives, scanned_traitors FROM `ttt`.`ttt_stats` WHERE communityid = '{community_id}';")
                     result = cursor.fetchone()
                     await tttStats(ctx, result, member)
