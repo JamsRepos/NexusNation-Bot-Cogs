@@ -3,14 +3,26 @@ from redbot.core import commands, checks, Config
 import mysql.connector
 from mysql.connector import Error
 
+steamid64ident = 76561197960265728
+
 def communityid_converter(communityid):
-    steamid64ident = 76561197960265728
     sid_split = communityid.split(':')
     commid = int(sid_split[2]) * 2
     if sid_split[1] == '1':
         commid += 1
     commid += steamid64ident
     return commid
+
+def commid_to_steamid(commid):
+  steamid = []
+  steamid.append('STEAM_1:')
+  steamidacct = int(commid) - steamid64ident
+  if steamidacct % 2 == 0:
+      steamid.append('0:')
+  else:
+      steamid.append('1:')
+  steamid.append(str(steamidacct // 2))
+  return ''.join(steamid)
 
 async def gangEmbed(ctx, gangs, name, index):
     gang_data, positions, kills, names = {}, [], [], []
@@ -282,7 +294,7 @@ class QueryTNN(commands.Cog):
                 try:
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
-                    community_id = communityid_converter(result[0])
+                    community_id = result[0]
                     cursor.execute(f"SELECT rounds_played, rounds_won, shots_fired, damage_given, damage_taken, killed_innocents, killed_traitors, killed_detectives, scanned_traitors FROM `ttt`.`ttt_stats` WHERE communityid = '{community_id}';")
                     result = cursor.fetchone()
                     await tttStats(ctx, result, member)
@@ -335,7 +347,7 @@ class QueryTNN(commands.Cog):
                 try:
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
-                    community_id = result[0]
+                    community_id = commid_to_steamid(result[0])
                     cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections, country, style FROM `surf`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await surfbhopStats(ctx, result, member)
@@ -386,7 +398,7 @@ class QueryTNN(commands.Cog):
                 try:
                     cursor.execute(f"SELECT `steamid` FROM `du_users` WHERE userid = '{member.id}';")
                     result = cursor.fetchone()
-                    community_id = result[0]
+                    community_id = commid_to_steamid(result[0])
                     cursor.execute(f"SELECT points, wrpoints, top10points, finishedmapspro, finishedbonuses, finishedstages, wrs, wrbs, wrcps, top10s, lastseen, joined, timealive, connections, country, style FROM `bhop`.`ck_playerrank` WHERE steamid = '{community_id}' AND style = {styleint};")
                     result = cursor.fetchone()
                     await surfbhopStats(ctx, result, member)

@@ -120,7 +120,7 @@ class Claim_Twitch(commands.Cog):
     @commands.command()
     async def claimvip(self, ctx):
         """Claim your monthly tokens as a Twitch Subscriber."""
-        userid = communityid_converter(read('discord_integration', f"SELECT IFNULL( (SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}) , 0);"))
+        userid = read('discord_integration', f"SELECT IFNULL( (SELECT steamid FROM `du_users` WHERE userid = {str(ctx.author.id)}) , 0);")
         await self.config.member(ctx.author).steamid.set(userid)
 
         store = read('store', f"SELECT IFNULL( (SELECT id FROM `players` WHERE uid = {userid}) , 0);")
