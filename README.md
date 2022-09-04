@@ -1,5 +1,5 @@
 # NexusNation-Bot-Cogs
-A compilation of RedBot Discord Cogs which were used within the NexusNation community.
+A compilation of RedBot Discord Cogs which were used within the NexusNation community. This code does not reflect current abilities and is merely for portfolio purposes.
 
 **Role Reminder** • Notifies & messages users when they lose their Top Donator, VIP or VIP+ role 
 
